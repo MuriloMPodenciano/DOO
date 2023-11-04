@@ -103,16 +103,12 @@ public class Ata {
     public void encerrarAta(Encerramento encerramento) {
         this.encerramento = encerramento;
     }
-
+    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-        result = prime * result + ((dataInicio == null) ? 0 : dataInicio.hashCode());
-        result = prime * result + ((local == null) ? 0 : local.hashCode());
-        result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
         return result;
     }
 
@@ -129,26 +125,6 @@ public class Ata {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
-            return false;
-        if (titulo == null) {
-            if (other.titulo != null)
-                return false;
-        } else if (!titulo.equals(other.titulo))
-            return false;
-        if (dataInicio == null) {
-            if (other.dataInicio != null)
-                return false;
-        } else if (!dataInicio.equals(other.dataInicio))
-            return false;
-        if (local == null) {
-            if (other.local != null)
-                return false;
-        } else if (!local.equals(other.local))
-            return false;
-        if (grupo == null) {
-            if (other.grupo != null)
-                return false;
-        } else if (!grupo.equals(other.grupo))
             return false;
         return true;
     }
