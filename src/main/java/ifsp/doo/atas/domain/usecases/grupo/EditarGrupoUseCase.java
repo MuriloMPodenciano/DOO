@@ -5,7 +5,9 @@ import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.model.GrupoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class EditarGrupoUseCase {
     @Autowired
     private GrupoRepository repository;
