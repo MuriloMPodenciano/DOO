@@ -4,11 +4,13 @@ import ifsp.doo.atas.domain.model.DadosCadastroGrupo;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.model.GrupoRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class CadastrarGrupoUseCase {
+    @Autowired
     private GrupoRepository repository;
 
     public void cadastrarGrupo(@Valid DadosCadastroGrupo dados){
