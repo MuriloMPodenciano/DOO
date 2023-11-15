@@ -1,15 +1,15 @@
 package ifsp.doo.atas.domain.persistence;
 
 import ifsp.doo.atas.domain.model.Grupo;
-import org.springframework.data.jpa.repository.JpaRepository;
+import ifsp.doo.atas.domain.model.GrupoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class GrupoDAO implements DAO<Long, Grupo>{
-    private JpaRepository<Grupo, Long> repository;
+    private GrupoRepository repository;
 
-    public GrupoDAO(JpaRepository<Grupo, Long> repository) {
+    public GrupoDAO(GrupoRepository repository) {
         this.repository = repository;
     }
 
@@ -23,6 +23,10 @@ public class GrupoDAO implements DAO<Long, Grupo>{
         return repository.findById(id);
     }
 
+    public boolean existsByName(String nome){
+        return repository.existByNome(nome);
+    }
+
     @Override
     public Grupo create(Grupo grupo) {
         return repository.save(grupo);
@@ -31,6 +35,12 @@ public class GrupoDAO implements DAO<Long, Grupo>{
     @Override
     public Grupo update(Long id, Grupo grupo) {
         return repository.save(grupo);
+    }
+
+    public boolean changeStatus(Long id){
+        Grupo grupo = repository.getReferenceById(id);
+        grupo.mudarStatus();
+        return true;
     }
 
     @Override
