@@ -36,17 +36,17 @@ public class Grupo {
         status = !status;
     }
 
-    public void atualizarGrupo(DadosAtualizacaoGrupo dados) throws NullPointerException {
-        if (dados == null)
+    public void atualizarGrupo(Grupo grupo) throws NullPointerException {
+        if (grupo == null)
             throw new NullPointerException("grupo must not be null");
 
-        if (dados.nome() != null && !dados.nome().isBlank())
-            nome = dados.nome();
+        if (grupo.nome != null && !grupo.nome.isBlank())
+            nome = grupo.nome;
 
-        status = dados.status();
+        status = grupo.status;
 
-        if (dados.funcionarios() != null)
-            funcionarios = dados.funcionarios();
+        if (grupo.funcionarios != null)
+            funcionarios = grupo.funcionarios;
     }
 
     public Long getId() {
