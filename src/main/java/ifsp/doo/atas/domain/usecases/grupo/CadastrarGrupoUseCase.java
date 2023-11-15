@@ -20,11 +20,13 @@ public class CadastrarGrupoUseCase {
         this.dao = new GrupoDAO(repository);
     }
 
-    public void cadastrarGrupo(@Valid DadosCadastroGrupo dados){
+    public String cadastrarGrupo(@Valid DadosCadastroGrupo dados){
         if(dao.existsByName(dados.nome())){
             throw new DataIntegrityViolationException("Grupo com nome " + dados.nome() + " já existe.");
         }
         Grupo grupo = new Grupo(dados.nome(), dados.funcionarios());
         dao.create(grupo);
+
+        return "Grupo criado com sucesso.";
     }
 }
