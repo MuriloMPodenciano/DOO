@@ -1,4 +1,11 @@
 package ifsp.doo.atas.domain.model;
 
-public record DadosAtualizacaoPessoa {
+import jakarta.validation.constraints.NotNull;
+
+public record DadosAtualizacaoPessoa (
+        @NotNull Long id,
+        String nome,
+        String email,
+        String cargo
+    ){
 }

@@ -43,4 +43,8 @@ public class PessoaDAO implements DAO<Long, Pessoa>{
     public boolean removeByKey(Long key) {
         return false;
     }
+
+    public boolean existsByName(String nome){
+        return repository.existByNome(nome);
+    }
 }
