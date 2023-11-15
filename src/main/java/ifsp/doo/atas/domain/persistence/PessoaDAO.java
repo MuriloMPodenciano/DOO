@@ -1,11 +1,18 @@
 package ifsp.doo.atas.domain.persistence;
 
 import ifsp.doo.atas.domain.model.Pessoa;
+import ifsp.doo.atas.domain.model.PessoaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class PessoaDAO implements DAO<Long, Pessoa>{
+
+    private final PessoaRepository repository;
+
+    public PessoaDAO(PessoaRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Pessoa> getAll() {
