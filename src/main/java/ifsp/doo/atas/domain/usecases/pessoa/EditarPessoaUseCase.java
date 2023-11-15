@@ -23,7 +23,7 @@ public class EditarPessoaUseCase {
         this.dao = new PessoaDAO(repository);
     }
 
-    @Transactional
+    @Autowired
     public String editarPessoa(@Valid DadosAtualizacaoPessoa dados) {
         Pessoa pessoa = dao.get(dados.id())
                 .orElseThrow(() -> new EntityNotFoundException("Pessoa " + dados.id() + " não existe."));
