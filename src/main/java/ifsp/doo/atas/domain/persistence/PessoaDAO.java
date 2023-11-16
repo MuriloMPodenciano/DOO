@@ -47,4 +47,8 @@ public class PessoaDAO implements DAO<Long, Pessoa>{
     public boolean existsByName(String nome){
         return repository.existByNome(nome);
     }
+
+    public Pessoa save(Pessoa pessoa) {
+        return repository.save(pessoa);
+    }
 }
