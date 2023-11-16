@@ -1,30 +1,30 @@
 package ifsp.doo.atas.domain.usecases.grupo;
 
-import ifsp.doo.atas.domain.model.DadosAtualizacaoGrupo;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.model.GrupoRepository;
 import ifsp.doo.atas.domain.persistence.GrupoDAO;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public class EditarGrupoUseCase {
+public class AlterarStatusGrupoUseCase {
     @Autowired
     private GrupoRepository repository;
     private GrupoDAO dao;
 
-    public EditarGrupoUseCase(GrupoRepository repository) {
+    public AlterarStatusGrupoUseCase(GrupoRepository repository) {
         this.dao = new GrupoDAO(repository);
     }
 
-    public String editarGrupo(@Valid DadosAtualizacaoGrupo dados){
-        if(!dao.get(dados.id()).isPresent()){
-            throw new EntityNotFoundException("Grupo " + dados.id() + " nao existe.");
+    public String alterarStatus(@Valid @NotNull Long id){
+        if(!dao.get(id).isPresent()){
+            throw new EntityNotFoundException("Grupo " + id + " nao existe.");
         }
-        Grupo grupo = new Grupo(dados.id(), dados.nome(), dados.funcionarios());
-        dao.update(dados.id(), grupo);
-        return "Grupo editado com sucesso.";
+
+        dao.changeStatus(id);
+        return "Status do grupo alterado com sucesso";
     }
 }
