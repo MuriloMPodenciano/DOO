@@ -3,7 +3,27 @@ package ifsp.doo.atas.domain.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import ifsp.doo.atas.domain.DTO.ata.AtaGetPersistDTO;
+import ifsp.doo.atas.domain.DTO.ata.AtaPostRequestDTO;
+import ifsp.doo.atas.domain.DTO.ata.AtaPutRequestDTO;
+import ifsp.doo.atas.domain.DTO.ata.PreAtaPostRequestDTO;
+import ifsp.doo.atas.domain.utils.Notification;
+
+import jakarta.persistence.Embedded;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@EqualsAndHashCode(of = "id")
 public class Ata {
     private Long id;
     private String titulo;
@@ -12,120 +32,176 @@ public class Ata {
     private LocalDateTime dataInicio;
     private LocalDateTime fimPrevisto;
     private String local;
+
+    @ManyToOne
     private Grupo grupo;
+
+    @Embedded
+    @OneToOne
     private Encerramento encerramento;
+
+    @OneToMany
     private List<Pessoa> listaPresenca;
+
+    @OneToMany
     private List<Pauta> pautas;
+
+    @OneToMany
     private List<Informe> informes;
 
-    public Ata(Long id, String titulo, String discussao, String textoAbertura, String local, LocalDateTime dataInicio, LocalDateTime fimPrevisto, Grupo grupo) {
-        this.id = id;
-        this.titulo = titulo;
-        this.discussao = discussao;
-        this.textoAbertura = textoAbertura;
-        this.local = local;
-        this.dataInicio = dataInicio;
-        this.fimPrevisto = fimPrevisto;
+    public Ata(PreAtaPostRequestDTO ataDTO) {
+        Notification notificacao = new Notification();
+
+        if (!ataDTO.grupo().status())
+            notificacao.addError("Cannot use a disabled grupo");
+
+        if (ataDTO.titulo() == null)
+            notificacao.addError("titulo cannot be a empty string");
+
+        if (ataDTO.titulo() != null && ataDTO.titulo().isBlank())
+            notificacao.addError("titulo must contain caracteres");
+
+        if (ataDTO.local() == null)
+            notificacao.addError("local cannot be a empty string");
+
+        if (ataDTO.local() != null && ataDTO.local().isBlank())
+            notificacao.addError("local must contain caracteres");
+
+        Grupo grupo;
+
+        try {
+            grupo = new Grupo(ataDTO.grupo());
+        } catch (IllegalArgumentException e) {
+            notificacao.addError(e.getMessage());
+        }
+
+        if (notificacao.hasErrors())
+            throw new IllegalArgumentException(notificacao.errorMessage());
+
+        titulo = ataDTO.titulo();
+        dataInicio = ataDTO.dataInicio();
+        local = ataDTO.local();
         this.grupo = grupo;
-        encerramento = null;
         listaPresenca = new ArrayList<Pessoa>();
         pautas = new ArrayList<Pauta>();
         informes = new ArrayList<Informe>();
     }
 
-    public Ata(String titulo, LocalDateTime dataInicio, String local, Grupo grupo) {
-        this(null, titulo, null, null, local, dataInicio, null, grupo);
+    public Ata(AtaPostRequestDTO ataDTO) {
+        this(
+            ataDTO.id(),
+            ataDTO.titulo(),
+            ataDTO.discussao(),
+            ataDTO.textoAbertura(),
+            ataDTO.dataInicio(),
+            ataDTO.fimPrevisto(),
+            ataDTO.local(),
+            new Grupo(ataDTO.grupo()),
+            new Encerramento(ataDTO.encerramento()),
+            ataDTO.listaPresenca().stream().map(Pessoa::new).collect(Collectors.toList()),
+            ataDTO.pautas().stream().map(Pauta::new).collect(Collectors.toList()),
+            ataDTO.informes().stream().map(Informe::new).collect(Collectors.toList())
+        );
+    }
+
+    public Ata(AtaGetPersistDTO ataBanco) {
+        this(
+            ataBanco.id(),
+            ataBanco.titulo(),
+            ataBanco.discussao(),
+            ataBanco.textoAbertura(),
+            ataBanco.dataInicio(),
+            ataBanco.fimPrevisto(),
+            ataBanco.local(),
+            new Grupo(ataBanco.grupo()),
+            new Encerramento(ataBanco.encerramento()),
+            ataBanco.listaPresenca().stream().map(Pessoa::new).collect(Collectors.toList()),
+            ataBanco.pautas().stream().map(Pauta::new).collect(Collectors.toList()),
+            ataBanco.informes().stream().map(Informe::new).collect(Collectors.toList())
+        );
     }
 
     public void adicionarInforme(Informe informe) {
-        if (encerramento != null)   
-            return;
+        if (estaFechado())
+            throw new IllegalStateException("ata is already closed");
 
         informes.add(informe);
     }
 
     public void removerInforme(Informe informe) {
-        if (encerramento != null)   
-            return;
+        if (estaFechado())
+            throw new IllegalStateException("ata is already closed");
 
         informes.remove(informe);
     }
 
     public void adicionarPauta(Pauta pauta) {
-        if (encerramento != null)   
-            return;
+        if (estaFechado())
+            throw new IllegalStateException("ata is already closed");
 
         pautas.add(pauta);
     }
 
     public void removerPauta(Pauta pauta) {
-        if (encerramento != null)   
-            return;
+        if (estaFechado())
+            throw new IllegalStateException("ata is already closed");
 
         pautas.remove(pauta);
     }
 
     public void marcarPresenca(Pessoa pessoa) {
-        if (encerramento != null)   
-            return;
+        if (estaFechado())
+            throw new IllegalStateException("ata is already closed");
+
+        if (!grupo.temFuncionario(pessoa))
+            throw new IllegalStateException("pessoa does not belong to the group");
 
         listaPresenca.add(pessoa);
     }
 
-    public void modificarMomentoInicio(LocalDateTime momento) {
-        if (encerramento != null)   
-            return;
+    public void atualizarAta(AtaPutRequestDTO ataDTO) {
+        if (estaFechado())
+            throw new IllegalStateException("ata is already closed");
 
-        dataInicio = momento;
-    }
+        Notification notificacao = new Notification();
 
-    public void modificarLocal(String local) {
-        if (encerramento != null)   
-            return;
+        if (ataDTO.local() == null)
+            notificacao.addError("local cannot be empty");
 
-        this.local = local;
-    }
+        if (ataDTO.local() != null && ataDTO.local().isBlank())
+            notificacao.addError("local cannot be empty");
 
-    public void adicionarDiscussao(String discussao) {
-        if (encerramento != null)   
-            return;
+        if (ataDTO.discussao() == null)
+            notificacao.addError("discussao cannot be empty");
 
-        this.discussao = discussao;
-    }
+        if (ataDTO.discussao() != null && ataDTO.discussao().isBlank())
+            notificacao.addError("discussao cannot be empty");
 
-    public void adicionarTextoAbertura(String textoAbertura) {
-        if (encerramento != null)   
-            return;
+        if (ataDTO.textoAbertura() == null)
+            notificacao.addError("textoAbertura cannot be empty");
 
-        this.textoAbertura = textoAbertura;
-    }
+        if (ataDTO.textoAbertura() != null && ataDTO.textoAbertura().isBlank())
+            notificacao.addError("texto abertura cannot be empty");
 
-    public void encerrarAta(Encerramento encerramento) {
+        Encerramento encerramento;
+
+        try {
+            encerramento = new Encerramento(ataDTO.encerramento());
+        } catch (IllegalArgumentException e) {
+            notificacao.addError(e.getMessage());
+        }
+
+        if (notificacao.hasErrors())
+            throw new IllegalArgumentException(notificacao.errorMessage());
+
+        dataInicio = ataDTO.dataInicio();
+        local = ataDTO.local();
+        discussao = ataDTO.discussao();
+        textoAbertura = ataDTO.textoAbertura();
         this.encerramento = encerramento;
     }
-    
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Ata other = (Ata) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+    public boolean estaFechado() {
+        return encerramento == null;
     }
 }
