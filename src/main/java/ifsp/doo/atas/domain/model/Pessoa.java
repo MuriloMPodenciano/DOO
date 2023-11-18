@@ -1,90 +1,75 @@
 package ifsp.doo.atas.domain.model;
 
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaPostRequestDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaPutRequestDTO;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
+@Getter
 public class Pessoa {
     private Long id;
     private String nome;
-    private String email;
+    private Email email;
     private String cargo;
-    private boolean status;
+    private Boolean status;
 
-    public Pessoa(Long id, String nome, String email, String cargo, boolean status) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.cargo = cargo;
-        this.status = status;
+    public Pessoa(String nome, Email email, String cargo, Boolean status) {
+        this(null, nome, email, cargo, status);
     }
 
-    public Pessoa(Long id, String nome, String email, String cargo) {
-        this(id, nome, email, cargo, true);
+    public Pessoa(PessoaGetPersistDTO pessoaBanco) {
+        this(
+            pessoaBanco.id(),
+            pessoaBanco.nome(),
+            new Email(pessoaBanco.email()),
+            pessoaBanco.cargo(),
+            pessoaBanco.status()
+        );
     }
 
-    public Pessoa(String nome, String email, String cargo) {
-        this(null, nome, email, cargo);
+    public Pessoa(PessoaPostRequestDTO pessoaDTO) {
+        this(
+            pessoaDTO.nome(),
+            new Email(pessoaDTO.email()),
+            pessoaDTO.cargo(),
+            pessoaDTO.status()
+        );
     }
 
-    public void mudarStatus() {
-        status = !status;
+    public Pessoa(PessoaGetResponseDTO pessoaDTO) {
+        this(
+            pessoaDTO.id(),
+            pessoaDTO.nome(),
+            new Email(pessoaDTO.email()),
+            pessoaDTO.cargo(),
+            pessoaDTO.status()
+        );
     }
 
-    public void atualizarPessoa(Pessoa pessoa) throws NullPointerException {
-        if (pessoa == null)
-            throw new NullPointerException("pessoa must not be null");
+    public void atualizarPessoa(PessoaPutRequestDTO pessoaDTO) {
+        if (pessoaDTO.cargo() != null && !pessoaDTO.cargo().isBlank())
+            cargo = pessoaDTO.cargo();
 
-        if (pessoa.nome != null && !pessoa.nome.isBlank())
-            nome = pessoa.nome;
-
-        if (pessoa.email != null && !pessoa.email.isBlank())
-            email = pessoa.email;
-
-        if (pessoa.cargo != null && !pessoa.cargo.isBlank())
-            cargo = pessoa.cargo;
-
-        status = pessoa.status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public boolean isActive() {
-        return status;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Pessoa other = (Pessoa) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+        status = pessoaDTO.status();
     }
 }
+
+/*
+ * changes:
+ * - adicionando o lombokinha
+ * - remoção de construtores desnecessarios e poluentes
+ * - criação do objeto Email e adequando as entradas e saidas do tipo
+ * - como dito no controller, o usuario escolhe o novo valor do status e
+ *     se vier o mesmo valor, isso não será considerado um erro. isso
+ *     dispensa o método mudarStatus
+ * - colocando o método de atualizar pessoa nos conformes do documento
+ *     (somente cargo e status mudam)
+ * - até o presente momento, retirei os métodos de remover coisa
+ */

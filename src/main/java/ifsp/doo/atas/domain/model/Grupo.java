@@ -1,92 +1,82 @@
 package ifsp.doo.atas.domain.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
+import ifsp.doo.atas.domain.DTO.grupo.GrupoGetResponseDTO;
+import ifsp.doo.atas.domain.DTO.grupo.GrupoPostRequestDTO;
+import ifsp.doo.atas.domain.DTO.grupo.GrupoPutRequestDTO;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
+@Getter
 public class Grupo {
     private Long id;
     private String nome;
     private boolean status;
     private List<Pessoa> funcionarios;
 
-    public Grupo(Long id, String nome, List<Pessoa> funcionarios, boolean status) {
-        this.id = id;
-        this.nome = nome;
-        this.status = status;
-        this.funcionarios = funcionarios;
-    }
-
-    public Grupo(Long id, String nome, List<Pessoa> funcionarios) {
-        this(id, nome, funcionarios, true);
-    }
-
     public Grupo(String nome, List<Pessoa> funcionarios) {
-        this(null, nome, new ArrayList<Pessoa>());
+        this(null, nome, true, funcionarios);
     }
 
-    public void inserirFuncionario(Pessoa pessoa) throws NullPointerException {
+    public Grupo(GrupoPostRequestDTO grupoDTO) {
+        this(grupoDTO.nome(), grupoDTO.funcionarios());
+    }
+
+    public Grupo(GrupoGetPersistDTO grupoBanco) {
+        this(
+            grupoBanco.id(),
+            grupoBanco.nome(),
+            grupoBanco.status(),
+            grupoBanco.funcionarios()
+                .stream()
+                .map(Pessoa::new)
+                .collect(Collectors.toList())
+        );
+    }
+
+    public Grupo(GrupoGetResponseDTO grupo) {
+        this(
+            grupo.id(),
+            grupo.nome(),
+            grupo.status(),
+            grupo.funcionarios()
+                .stream()
+                .map(Pessoa::new)
+                .collect(Collectors.toList())
+        );
+    }
+
+    public void inserirFuncionario(Pessoa pessoa) {
         funcionarios.add(pessoa);
     }
 
-    public void removerFuncionario(Pessoa pessoa) throws NullPointerException {
-        funcionarios.remove(pessoa);
+    public void atualizarGrupo(GrupoPutRequestDTO grupoDTO) {
+        status = grupoDTO.status();
     }
 
-    public void mudarStatus() {
-        status = !status;
-    }
-
-    public void atualizarGrupo(Grupo grupo) throws NullPointerException {
-        if (grupo == null)
-            throw new NullPointerException("grupo must not be null");
-
-        if (grupo.nome != null && !grupo.nome.isBlank())
-            nome = grupo.nome;
-
-        status = grupo.status;
-
-        if (grupo.funcionarios != null)
-            funcionarios = grupo.funcionarios;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public boolean isActive() {
-        return status;
-    }
-
-    public List<Pessoa> getFuncionarios() {
-        return new ArrayList<Pessoa>(funcionarios);
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Grupo other = (Grupo) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+    public boolean temFuncionario(Pessoa pessoa) {
+        return funcionarios.contains(pessoa);
     }
 }
+
+/*
+ * changes:
+ * - adicionando o lombokinha
+ * - remoção de construtores desnecessarios e poluentes
+ * - como dito no controller, o usuario escolhe o novo valor do status e
+ *     se vier o mesmo valor, isso não será considerado um erro. isso
+ *     dispensa o método mudarStatus
+ * - colocando o método de atualizar pessoa nos conformes do documento
+ *     (somente status muda)
+ * - criando o novo método temFuncionario, pois preciso em EditarAtaUseCase
+ * - até o presente momento, retirei os métodos de remover coisa
+ */

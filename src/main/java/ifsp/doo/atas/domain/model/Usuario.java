@@ -1,9 +1,9 @@
 package ifsp.doo.atas.domain.model;
 
 public class Usuario {
-    static private String nome;
+    private static String nome;
 
-    private Usuario(String nome) {}
+    private Usuario() {}
 
     public static String getNome() {
         return nome;
@@ -11,7 +11,7 @@ public class Usuario {
 
     public static void setNome(String nome) {
         if (Usuario.nome != null)
-            return;
+            throw new IllegalStateException("usuario already exists");
 
         Usuario.nome = nome;
     }

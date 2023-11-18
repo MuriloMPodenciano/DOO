@@ -1,6 +1,6 @@
-package ifsp.doo.atas.domain.DTO.pauta;
+package ifsp.doo.atas.domain.DTO.informe;
 
-import ifsp.doo.atas.domain.model.Pauta;
+import ifsp.doo.atas.domain.model.Informe;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Pauta")
-public record PautaGetPersistDTO(
+@Table(name = "Informe")
+public record InformeGetPersistDTO(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id,
@@ -17,7 +17,7 @@ public record PautaGetPersistDTO(
     String nome,
     String descricao
 ) {
-    public PautaGetPersistDTO(Pauta pauta) {
-        this(pauta.getId(), pauta.getNome(), pauta.getDescricao());
+    public InformeGetPersistDTO(Informe informe) {
+        this(informe.getId(), informe.getNome(), informe.getDescricao());
     }
 }

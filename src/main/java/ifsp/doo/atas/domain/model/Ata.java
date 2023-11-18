@@ -6,15 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ifsp.doo.atas.domain.DTO.ata.AtaGetPersistDTO;
-import ifsp.doo.atas.domain.DTO.ata.AtaPostRequestDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaPutRequestDTO;
 import ifsp.doo.atas.domain.DTO.ata.PreAtaPostRequestDTO;
 import ifsp.doo.atas.domain.utils.Notification;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,21 +27,10 @@ public class Ata {
     private LocalDateTime dataInicio;
     private LocalDateTime fimPrevisto;
     private String local;
-
-    @ManyToOne
     private Grupo grupo;
-
-    @Embedded
-    @OneToOne
     private Encerramento encerramento;
-
-    @OneToMany
     private List<Pessoa> listaPresenca;
-
-    @OneToMany
     private List<Pauta> pautas;
-
-    @OneToMany
     private List<Informe> informes;
 
     public Ata(PreAtaPostRequestDTO ataDTO) {
@@ -67,7 +51,7 @@ public class Ata {
         if (ataDTO.local() != null && ataDTO.local().isBlank())
             notificacao.addError("local must contain caracteres");
 
-        Grupo grupo;
+        Grupo grupo = null;
 
         try {
             grupo = new Grupo(ataDTO.grupo());
@@ -87,23 +71,6 @@ public class Ata {
         informes = new ArrayList<Informe>();
     }
 
-    public Ata(AtaPostRequestDTO ataDTO) {
-        this(
-            ataDTO.id(),
-            ataDTO.titulo(),
-            ataDTO.discussao(),
-            ataDTO.textoAbertura(),
-            ataDTO.dataInicio(),
-            ataDTO.fimPrevisto(),
-            ataDTO.local(),
-            new Grupo(ataDTO.grupo()),
-            new Encerramento(ataDTO.encerramento()),
-            ataDTO.listaPresenca().stream().map(Pessoa::new).collect(Collectors.toList()),
-            ataDTO.pautas().stream().map(Pauta::new).collect(Collectors.toList()),
-            ataDTO.informes().stream().map(Informe::new).collect(Collectors.toList())
-        );
-    }
-
     public Ata(AtaGetPersistDTO ataBanco) {
         this(
             ataBanco.id(),
@@ -115,9 +82,18 @@ public class Ata {
             ataBanco.local(),
             new Grupo(ataBanco.grupo()),
             new Encerramento(ataBanco.encerramento()),
-            ataBanco.listaPresenca().stream().map(Pessoa::new).collect(Collectors.toList()),
-            ataBanco.pautas().stream().map(Pauta::new).collect(Collectors.toList()),
-            ataBanco.informes().stream().map(Informe::new).collect(Collectors.toList())
+            ataBanco.listaPresenca()
+                .stream()
+                .map(Pessoa::new)
+                .collect(Collectors.toList()),
+            ataBanco.pautas()
+                .stream()
+                .map(Pauta::new)
+                .collect(Collectors.toList()),
+            ataBanco.informes()
+                .stream()
+                .map(Informe::new)
+                .collect(Collectors.toList())
         );
     }
 
@@ -128,25 +104,11 @@ public class Ata {
         informes.add(informe);
     }
 
-    public void removerInforme(Informe informe) {
-        if (estaFechado())
-            throw new IllegalStateException("ata is already closed");
-
-        informes.remove(informe);
-    }
-
     public void adicionarPauta(Pauta pauta) {
         if (estaFechado())
             throw new IllegalStateException("ata is already closed");
 
         pautas.add(pauta);
-    }
-
-    public void removerPauta(Pauta pauta) {
-        if (estaFechado())
-            throw new IllegalStateException("ata is already closed");
-
-        pautas.remove(pauta);
     }
 
     public void marcarPresenca(Pessoa pessoa) {
@@ -155,6 +117,9 @@ public class Ata {
 
         if (!grupo.temFuncionario(pessoa))
             throw new IllegalStateException("pessoa does not belong to the group");
+
+        if (!pessoa.getStatus())
+            throw new IllegalStateException("Cannot add a disabled pessoa");
 
         listaPresenca.add(pessoa);
     }
@@ -183,7 +148,7 @@ public class Ata {
         if (ataDTO.textoAbertura() != null && ataDTO.textoAbertura().isBlank())
             notificacao.addError("texto abertura cannot be empty");
 
-        Encerramento encerramento;
+        Encerramento encerramento = null;
 
         try {
             encerramento = new Encerramento(ataDTO.encerramento());

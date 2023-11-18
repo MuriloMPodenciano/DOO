@@ -1,24 +1,28 @@
 package ifsp.doo.atas.domain.model;
 
-import ifsp.doo.atas.domain.DTO.informe.InformesGetPersistDTO;
-import ifsp.doo.atas.domain.DTO.informe.InformesPostRequestDTO;
+import ifsp.doo.atas.domain.DTO.informe.InformeGetPersistDTO;
+import ifsp.doo.atas.domain.DTO.informe.InformePostRequestDTO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Informe {
     private Long id;
     private String nome;
     private String descricao;
 
-    public Informe(Long id, String nome, String descricao) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
+    public Informe(String nome, String descricao) {
+        this(null, nome, descricao);
     }
 
-    public Informe(InformesPostRequestDTO dto) {
-        this(dto.id(), dto.nome(), dto.descricao());
+    public Informe(InformePostRequestDTO dto) {
+        this(dto.nome(), dto.descricao());
     }
 
-    public Informe(InformesGetPersistDTO dto) {
+    public Informe(InformeGetPersistDTO dto) {
         this(dto.id(), dto.nome(), dto.descricao());
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ifsp.doo.atas.domain.DTO.ata.AtaGetRequestDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetResponseDTO;
-import ifsp.doo.atas.domain.DTO.ata.AtaPostRequestDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaPutRequestDTO;
 import ifsp.doo.atas.domain.DTO.ata.PreAtaPostRequestDTO;
+import ifsp.doo.atas.domain.DTO.informe.InformePostRequestDTO;
+import ifsp.doo.atas.domain.DTO.pauta.PautaPostRequestDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 import ifsp.doo.atas.domain.usecases.ata.BuscarAtaUseCase;
 import ifsp.doo.atas.domain.usecases.ata.CadastrarAtaUseCase;
 import ifsp.doo.atas.domain.usecases.ata.EditarAtaUseCase;
@@ -29,7 +32,7 @@ public class AtaController {
     private CadastrarAtaUseCase cadastrarAta;
 
     @Autowired
-    private EditarAtaUseCase editatAta;
+    private EditarAtaUseCase editarAta;
 
     @GetMapping
     public List<AtaGetResponseDTO> getAllAtas(@RequestBody AtaGetRequestDTO request) {
@@ -41,13 +44,23 @@ public class AtaController {
         return cadastrarAta.createPreAta(preAtaDTO);
     }
 
-    @PostMapping("/completeAta")
-    public AtaGetResponseDTO createAta(@RequestBody AtaPostRequestDTO ataDTO) {
-        return cadastrarAta.reCreate(ataDTO);
+    @PostMapping("/{id}/listaPresenca")
+    public AtaGetResponseDTO addPessoa(@PathVariable("id") Long id, @RequestBody PessoaGetResponseDTO pessoa) {
+        return editarAta.addPessoa(id, pessoa);
+    }
+
+    @PostMapping("/{id}/pautas")
+    public AtaGetResponseDTO addPautas(@PathVariable("id") Long id, @RequestBody PautaPostRequestDTO pauta) {
+        return editarAta.addPauta(id, pauta);
+    }
+
+    @PostMapping("/{id}/informes")
+    public AtaGetResponseDTO addPinformes(@PathVariable("id") Long id, @RequestBody InformePostRequestDTO informe) {
+        return editarAta.addInforme(id, informe);
     }
 
     @PutMapping
     public AtaGetResponseDTO updateAta(@RequestBody AtaPutRequestDTO ataDTO) {
-        return editatAta.updateAta(ataDTO);
+        return editarAta.updateAta(ataDTO);
     }
 }

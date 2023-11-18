@@ -2,7 +2,6 @@ package ifsp.doo.atas.domain.usecases.ata;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,39 +9,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetRequestDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetResponseDTO;
-import ifsp.doo.atas.domain.model.AtaBuscarMode;
-import ifsp.doo.atas.domain.repository.AtaDAO;
+import ifsp.doo.atas.domain.model.AtaBuscarModo;
+import ifsp.doo.atas.domain.repository.AtaRepository;
 
 public class BuscarAtaUseCase {
     @Autowired
-    private AtaDAO ataDAO;
+    private AtaRepository ataDAO;
 
     public List<AtaGetResponseDTO> getAll(AtaGetRequestDTO request) {
-        if (request.modo() == AtaBuscarMode.ID && request.id() == null)
-            throw new IllegalArgumentException("id is empty in id mode");
+        if (request.modo() == AtaBuscarModo.TODOS)
+            return ataDAO.findAll()
+                .stream()
+                .map(AtaGetResponseDTO::new)
+                .collect(Collectors.toList());
 
-        if (
-            request.modo() == AtaBuscarMode.DATE &&
+        if (request.modo() == AtaBuscarModo.PALAVRA_CHAVE && request.palavraChave() == null)
+            throw new IllegalArgumentException("palavra chave is empty in palavra chave mode");
+
+        else if (
+            request.modo() == AtaBuscarModo.DATE &&
             (
                 (request.dataInicio() == null || request.dataFim() == null) ||
                 request.dataInicio().compareTo(request.dataFim()) > 0
             )
         )
-            throw new IllegalArgumentException("id is empty in id mode");
+            throw new IllegalArgumentException("date period is invalid in date period mode");
         
-        if (request.modo() == AtaBuscarMode.GRUPO_ID && request.grupoId() == null)
-            throw new IllegalArgumentException("id is empty in id mode");
+        else if (request.modo() == AtaBuscarModo.GRUPO_ID && request.grupoId() == null)
+            throw new IllegalArgumentException("grupo id is empty in grupo id mode");
 
         List<AtaGetPersistDTO> atas;
-        
-        switch (request.modo()) {
-            case ID:
-                Optional<AtaGetPersistDTO> ata = ataDAO.findById(request.id());
 
-                if (ata.isPresent()) 
-                    atas = Arrays.asList(ata.get());
-                else
-                    atas = Arrays.asList();
+        switch (request.modo()) {
+            case PALAVRA_CHAVE:
+                atas = ataDAO.findAllByPalavraChave(request.palavraChave());
                 break;
             case DATE:
                 atas = ataDAO.findAllByRange(request.dataInicio(), request.dataFim());
