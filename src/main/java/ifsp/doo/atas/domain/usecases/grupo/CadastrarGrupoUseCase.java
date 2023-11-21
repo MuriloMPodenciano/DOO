@@ -7,6 +7,7 @@ import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.repository.GrupoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -16,7 +17,7 @@ public class CadastrarGrupoUseCase {
 
     public GrupoGetResponseDTO cadastrarGrupo(GrupoPostRequestDTO grupoDTO) {
         if (repository.existsByNome(grupoDTO.nome()))
-            throw new DataIntegrityViolationException("Grupo already exists: " + grupoDTO.nome());
+            throw new DuplicateKeyException("Grupo already exists: " + grupoDTO.nome());
 
         Grupo grupo = new Grupo(grupoDTO);
 
