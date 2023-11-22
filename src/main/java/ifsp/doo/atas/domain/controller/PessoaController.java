@@ -41,7 +41,7 @@ public class PessoaController {
     }
 
     @PostMapping("/{id}/lista")
-    public PessoaGetResponseDTO cadastrarFuncionario(@RequestBody PessoaPostRequestDTO pessoaDTO) {
+    public PessoaGetResponseDTO cadastrarListaPessoa(@RequestBody PessoaPostRequestDTO pessoaDTO) {
         return cadastrarPessoa.cadastrarPessoa(pessoaDTO);
     }
 
