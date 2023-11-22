@@ -17,6 +17,6 @@ public class BuscarGrupoUseCase {
     }
 
     public GrupoGetPersistDTO getById(@PathVariable Long id) {
-        return repository.getById(id);
+        return repository.getReferenceById(id);
     }
 }
