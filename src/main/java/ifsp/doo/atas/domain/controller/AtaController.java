@@ -39,6 +39,11 @@ public class AtaController {
         return buscarAta.getAll(request);
     }
 
+    @GetMapping("/{id}")
+    public AtaGetResponseDTO get(@PathVariable("id") Long id) {
+        return buscarAta.get(id);
+    }
+
     @PostMapping
     public AtaGetResponseDTO createPreAta(@RequestBody PreAtaPostRequestDTO preAtaDTO) {
         return cadastrarAta.createPreAta(preAtaDTO);

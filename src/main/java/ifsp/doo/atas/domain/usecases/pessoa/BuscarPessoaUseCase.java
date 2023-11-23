@@ -10,9 +10,11 @@ import java.util.List;
 public class BuscarPessoaUseCase {
     @Autowired
     private PessoaRepository repository;
+
     public List<PessoaGetPersistDTO> getAll(){
         return repository.findAll();
     }
+
     public PessoaGetPersistDTO getById(@PathVariable Long id) {
         return repository.getReferenceById(id);
     }

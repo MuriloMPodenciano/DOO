@@ -40,29 +40,8 @@ public class PessoaController {
         return cadastrarPessoa.cadastrarPessoa(pessoaDTO);
     }
 
-    @PostMapping("/{id}/lista")
-    public PessoaGetResponseDTO cadastrarListaPessoa(@RequestBody PessoaPostRequestDTO pessoaDTO) {
-        return cadastrarPessoa.cadastrarPessoa(pessoaDTO);
-    }
-
     @PutMapping("/{id}")
     public PessoaGetResponseDTO atualizar(@RequestBody PessoaPutRequestDTO pessoaDTO) {
         return editarPesssoa.editarPessoa(pessoaDTO);
     }
-
-
 }
-
-/*
- * changes:
- * - o controller n deve ter acesso direto ao banco
- * - com o spring, tal como o nosso projeto, nós n instanciamos nada
- *     usamos @Autowired para ter uma injeção de dependencia
- * - o estilo da nossa API será: o usuário sempre manda as novas versões dos recursos
- *     e de quais partes do recurso
- * - status é uma parte do recurso pessoa, e é mudado, logo ele recebe o novo valor tbm.
- *     até então, receber o mesmo valor não será consederado um erro
- * - não iremos usar @Valid e afins do jakarta.validation. pelo menos não no controller/DTO
- * - como Pessoa não uma entidade, tornar atualizar @Transactional não surte mais efeito
- * - retornar uma String??
- */
