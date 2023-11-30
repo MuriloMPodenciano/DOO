@@ -60,16 +60,3 @@ public class Pessoa {
         status = pessoaDTO.status();
     }
 }
-
-/*
- * changes:
- * - adicionando o lombokinha
- * - remoção de construtores desnecessarios e poluentes
- * - criação do objeto Email e adequando as entradas e saidas do tipo
- * - como dito no controller, o usuario escolhe o novo valor do status e
- *     se vier o mesmo valor, isso não será considerado um erro. isso
- *     dispensa o método mudarStatus
- * - colocando o método de atualizar pessoa nos conformes do documento
- *     (somente cargo e status mudam)
- * - até o presente momento, retirei os métodos de remover coisa
- */

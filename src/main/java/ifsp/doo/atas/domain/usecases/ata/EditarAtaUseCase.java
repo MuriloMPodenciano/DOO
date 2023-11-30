@@ -1,6 +1,7 @@
 package ifsp.doo.atas.domain.usecases.ata;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import ifsp.doo.atas.domain.DTO.ata.AtaGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetResponseDTO;
@@ -14,12 +15,13 @@ import ifsp.doo.atas.domain.model.Pauta;
 import ifsp.doo.atas.domain.model.Pessoa;
 import ifsp.doo.atas.domain.repository.AtaRepository;
 
+@Transactional
 public class EditarAtaUseCase {
     @Autowired
-    private AtaRepository ataDAO;
+    private AtaRepository repository;
 
     public AtaGetResponseDTO updateAta(AtaPutRequestDTO ataDTO) {
-        AtaGetPersistDTO ataBanco = ataDAO.getReferenceById(ataDTO.id());
+        AtaGetPersistDTO ataBanco = repository.getReferenceById(ataDTO.id());
 
         Ata ata = new Ata(ataBanco);
 
@@ -27,11 +29,11 @@ public class EditarAtaUseCase {
 
         AtaGetPersistDTO ataAtualizada = new AtaGetPersistDTO(ata);
 
-        return new AtaGetResponseDTO(ataDAO.save(ataAtualizada));
+        return new AtaGetResponseDTO(repository.save(ataAtualizada));
     }
 
     public AtaGetResponseDTO addPessoa(Long ataId, PessoaGetResponseDTO pessoa) {
-        AtaGetPersistDTO ataBanco = ataDAO.getReferenceById(ataId);
+        AtaGetPersistDTO ataBanco = repository.getReferenceById(ataId);
 
         Ata ata = new Ata(ataBanco);
 
@@ -39,12 +41,11 @@ public class EditarAtaUseCase {
 
         AtaGetPersistDTO ataAtualizada = new AtaGetPersistDTO(ata);
 
-        return new AtaGetResponseDTO(ataDAO.save(ataAtualizada));
+        return new AtaGetResponseDTO(repository.save(ataAtualizada));
     }
 
     public AtaGetResponseDTO addPauta(Long id, PautaPostRequestDTO pauta) {
-        //já existe um com o mesmo nome na ata de id = id?
-        AtaGetPersistDTO ataBanco = ataDAO.getReferenceById(id);
+        AtaGetPersistDTO ataBanco = repository.getReferenceById(id);
 
         Ata ata = new Ata(ataBanco);
 
@@ -52,12 +53,11 @@ public class EditarAtaUseCase {
 
         AtaGetPersistDTO ataAtualizada = new AtaGetPersistDTO(ata);
 
-        return new AtaGetResponseDTO(ataDAO.save(ataAtualizada));
+        return new AtaGetResponseDTO(repository.save(ataAtualizada));
     }
 
     public AtaGetResponseDTO addInforme(Long id, InformePostRequestDTO informe) {
-        //já existe um com o mesmo nome na ata de id = id?
-        AtaGetPersistDTO ataBanco = ataDAO.getReferenceById(id);
+        AtaGetPersistDTO ataBanco = repository.getReferenceById(id);
 
         Ata ata = new Ata(ataBanco);
 
@@ -65,6 +65,6 @@ public class EditarAtaUseCase {
 
         AtaGetPersistDTO ataAtualizada = new AtaGetPersistDTO(ata);
 
-        return new AtaGetResponseDTO(ataDAO.save(ataAtualizada));
+        return new AtaGetResponseDTO(repository.save(ataAtualizada));
     }
 }

@@ -67,16 +67,3 @@ public class Grupo {
         return funcionarios.contains(pessoa);
     }
 }
-
-/*
- * changes:
- * - adicionando o lombokinha
- * - remoção de construtores desnecessarios e poluentes
- * - como dito no controller, o usuario escolhe o novo valor do status e
- *     se vier o mesmo valor, isso não será considerado um erro. isso
- *     dispensa o método mudarStatus
- * - colocando o método de atualizar pessoa nos conformes do documento
- *     (somente status muda)
- * - criando o novo método temFuncionario, pois preciso em EditarAtaUseCase
- * - até o presente momento, retirei os métodos de remover coisa
- */

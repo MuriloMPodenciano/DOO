@@ -4,7 +4,7 @@ public class Email {
     private String email;
 
     public Email(String email) {
-        if (!email.matches(""))
+        if (!email.matches("^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$"))
             throw new IllegalArgumentException("invalid email: " + email);
 
         this.email = email;

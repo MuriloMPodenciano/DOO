@@ -26,23 +26,3 @@ public class EditarPessoaUseCase {
         return new PessoaGetResponseDTO(repository.save(pessoaAtualizada));
     }
 }
-
-/*
- * changes:
- * - @Service acho que é dispensável no nosso projeto
- * - eu acho que você confundiu um pouco sobre aonde colocar a anotação @Autowired
- * - UseCases são camadas internas da aplicação, então ela tem acesso ao banco
- *     de dados por si própria, até mesmo pq senão eles não conseguiriam delegar
- *     o fluxo do programa. Ou seja, ele não recebe repository por parametro
- * - ok, é só exluir o construtor e colocar @Autowired em repository...
- *     N. @Autowired e final keyword não combinam juntas, ou seja, tira final
- * - você não precisa verificar a existencia de uma entidade no banco se
- *     o spring já oferece um método que faz isso... aka. getReferenceById()
- * - o resto do caminho é o seguinte: pega o DTO de banco, transforma em uma
- *     model. pega os dados do DTO de requisição e pede pro model se atualizar
- *     por fim, persiste a model no banco(passando pra DTO de banco novamente)
- *     e envia a resposta (o recurso atualizado) em forma de DTO de resposta.
- * - retornando uma String??
- * - @Valid e correlatos da jakarta.validation são fazem sentido aqui pois quem
- *     valida algo é a model, então, no máximo seria lá
- */

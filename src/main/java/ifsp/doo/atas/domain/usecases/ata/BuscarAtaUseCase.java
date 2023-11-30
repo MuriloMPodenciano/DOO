@@ -14,11 +14,11 @@ import ifsp.doo.atas.domain.repository.AtaRepository;
 
 public class BuscarAtaUseCase {
     @Autowired
-    private AtaRepository ataDAO;
+    private AtaRepository repository;
 
     public List<AtaGetResponseDTO> getAll(AtaGetRequestDTO request) {
-        if (request.modo() == AtaBuscarModo.TODOS)
-            return ataDAO.findAll()
+        if (request == null || request.modo() == AtaBuscarModo.TODOS)
+            return repository.findAll()
                 .stream()
                 .map(AtaGetResponseDTO::new)
                 .collect(Collectors.toList());
@@ -42,13 +42,13 @@ public class BuscarAtaUseCase {
 
         switch (request.modo()) {
             case PALAVRA_CHAVE:
-                atas = ataDAO.findAllByPalavraChave(request.palavraChave());
+                atas = repository.findAllByPalavraChave(request.palavraChave());
                 break;
             case DATE:
-                atas = ataDAO.findAllByRange(request.dataInicio(), request.dataFim());
+                atas = repository.findAllByRange(request.dataInicio(), request.dataFim());
                 break;
             case GRUPO_ID:
-                atas = ataDAO.findAllByGrupoId(request.grupoId());
+                atas = repository.findAllByGrupoId(request.grupoId());
                 break;
             default:
                 atas = Arrays.asList();
@@ -58,5 +58,9 @@ public class BuscarAtaUseCase {
             .stream()
             .map(AtaGetResponseDTO::new)
             .collect(Collectors.toList());
+    }
+
+    public AtaGetResponseDTO get(Long id) {
+        return new AtaGetResponseDTO(repository.getReferenceById(id));
     }
 }

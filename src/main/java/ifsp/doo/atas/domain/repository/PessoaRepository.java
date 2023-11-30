@@ -9,8 +9,3 @@ public interface PessoaRepository extends JpaRepository<PessoaGetPersistDTO, Lon
     public boolean existsByEmail(Email email);
 }
 
-/*
- * cnages:
- * - nome não é uma chame primaria, então email, como uma chave unique
- *     é de melhor uso pra verificar se existe uma entidade já cadastrada
- */
