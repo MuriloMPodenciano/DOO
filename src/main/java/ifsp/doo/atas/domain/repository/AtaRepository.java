@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetPersistDTO;
 
 public interface AtaRepository extends JpaRepository<AtaGetPersistDTO, Long> {
-    @Query("SELECT * FROM Ata ata WHERE ata.nome LIKE '%?1%'")
+    @Query("SELECT * FROM Ata ata WHERE ata.titulo LIKE '%?1%'")
     List<AtaGetPersistDTO> findAllByPalavraChave(String palavraChave);
 
     @Query("SELECT * FROM Ata ata WHERE ata.dataInicio >= ?1 AND ata.dataInicio <= ?2")

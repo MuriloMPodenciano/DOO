@@ -1,7 +1,9 @@
 package ifsp.doo.atas.domain.DTO.informe;
 
-public record InformeGetResponseDTO(Long id, String nome, String descricao) {
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
+
+public record InformeGetResponseDTO(Long id, String informe, PessoaGetResponseDTO pessoa, Boolean informado) {
     public InformeGetResponseDTO(InformeGetPersistDTO informe) {
-        this(informe.id(), informe.nome(), informe.descricao());
+        this(informe.getId(), informe.getInforme(), new PessoaGetResponseDTO(informe.getPessoa()), informe.getInformado());
     }
 }

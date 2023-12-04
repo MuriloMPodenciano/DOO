@@ -2,14 +2,20 @@ package ifsp.doo.atas.domain.DTO.ata;
 
 import java.time.LocalDateTime;
 
-import ifsp.doo.atas.domain.DTO.encerramento.EncerramentoPostRequestDTO;
+import ifsp.doo.atas.domain.DTO.grupo.GrupoGetResponseDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 
 public record AtaPutRequestDTO(
     Long id,
-    LocalDateTime dataInicio,
-    String local,
-    String discussao,
+    String titulo,
+    String descricao,
     String textoAbertura,
-    EncerramentoPostRequestDTO encerramento
+    PessoaGetResponseDTO pessoa,
+    LocalDateTime dataInicio,
+    LocalDateTime fimPrevisto,
+    String local,
+    GrupoGetResponseDTO grupo,
+    String textoEncerramento,
+    LocalDateTime horaEncerramento
 ) {
 }

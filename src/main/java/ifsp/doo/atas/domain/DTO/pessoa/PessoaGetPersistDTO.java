@@ -6,19 +6,25 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Pessoa")
-public record PessoaGetPersistDTO(
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public class PessoaGetPersistDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id,
+    private Long id;
 
-    String nome,
-    String email,
-    String cargo,
-    Boolean status
-) {
+    private String nome;
+    private String email;
+    private String cargo;
+    private Boolean status;
+
     public PessoaGetPersistDTO(Pessoa pessoa) {
         this(
             pessoa.getId(),

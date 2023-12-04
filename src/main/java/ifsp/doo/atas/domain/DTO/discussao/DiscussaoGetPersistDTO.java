@@ -1,35 +1,33 @@
-package ifsp.doo.atas.domain.DTO.informe;
+package ifsp.doo.atas.domain.DTO.discussao;
 
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
-import ifsp.doo.atas.domain.model.Informe;
+import ifsp.doo.atas.domain.model.Discussao;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Informe")
+@Table(name = "Discussao")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class InformeGetPersistDTO {
+public class DiscussaoGetPersistDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String informe;
-
-    @ManyToOne
+    private String discussao;
+    
+    @OneToOne
     private PessoaGetPersistDTO pessoa;
 
-    private Boolean informado;
-
-    public InformeGetPersistDTO(Informe informe) {
-        this(informe.getId(), informe.getInforme(), new PessoaGetPersistDTO(informe.getPessoa()), informe.getInformado());
+    public DiscussaoGetPersistDTO(Discussao discussao) {
+        this(discussao.getId(), discussao.getDiscussao(), new PessoaGetPersistDTO(discussao.getPessoa()));
     }
 }

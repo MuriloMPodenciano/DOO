@@ -5,14 +5,13 @@ import java.util.stream.Collectors;
 
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 
-
 public record GrupoGetResponseDTO(Long id, String nome, boolean status, List<PessoaGetResponseDTO> funcionarios) {
     public GrupoGetResponseDTO(GrupoGetPersistDTO grupo) {
         this(
-            grupo.id(),
-            grupo.nome(),
-            grupo.status(),
-            grupo.funcionarios()
+            grupo.getId(),
+            grupo.getNome(),
+            grupo.getStatus(),
+            grupo.getFuncionarios()
                 .stream()
                 .map(PessoaGetResponseDTO::new)
                 .collect(Collectors.toList())

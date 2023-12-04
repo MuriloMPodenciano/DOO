@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Grupo {
     private Long id;
     private String nome;
-    private boolean status;
+    private Boolean status;
     private List<Pessoa> funcionarios;
 
     public Grupo(String nome, List<Pessoa> funcionarios) {
@@ -33,10 +33,10 @@ public class Grupo {
 
     public Grupo(GrupoGetPersistDTO grupoBanco) {
         this(
-            grupoBanco.id(),
-            grupoBanco.nome(),
-            grupoBanco.status(),
-            grupoBanco.funcionarios()
+            grupoBanco.getId(),
+            grupoBanco.getNome(),
+            grupoBanco.getStatus(),
+            grupoBanco.getFuncionarios()
                 .stream()
                 .map(Pessoa::new)
                 .collect(Collectors.toList())
@@ -65,5 +65,15 @@ public class Grupo {
 
     public boolean temFuncionario(Pessoa pessoa) {
         return funcionarios.contains(pessoa);
+    }
+
+    static  Grupo parseGrupo(GrupoGetResponseDTO grupo) {
+        if (grupo == null)
+            return null;
+        try {
+            return new Grupo(grupo);
+        } catch(Exception e) {
+            return null;
+        }
     }
 }

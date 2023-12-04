@@ -1,6 +1,6 @@
 package ifsp.doo.atas.domain.usecases.ata;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,42 +17,27 @@ public class BuscarAtaUseCase {
     private AtaRepository repository;
 
     public List<AtaGetResponseDTO> getAll(AtaGetRequestDTO request) {
-        if (request == null || request.modo() == AtaBuscarModo.TODOS)
-            return repository.findAll()
-                .stream()
-                .map(AtaGetResponseDTO::new)
-                .collect(Collectors.toList());
+        List<AtaGetPersistDTO> atas = switch (request.modo()) {
+            case PALAVRA_CHAVE -> {
+                if (request.modo() == AtaBuscarModo.PALAVRA_CHAVE && request.palavraChave() == null)
+                    throw new IllegalArgumentException("palavra chave is empty in palavra chave mode");
 
-        if (request.modo() == AtaBuscarModo.PALAVRA_CHAVE && request.palavraChave() == null)
-            throw new IllegalArgumentException("palavra chave is empty in palavra chave mode");
+                yield repository.findAllByPalavraChave(request.palavraChave());
+            }
+            case DATE -> {
+                if (request.modo() == AtaBuscarModo.DATE && !isDateRangeCorrect(request))
+                    throw new IllegalArgumentException("date period is invalid in date period mode");
 
-        else if (
-            request.modo() == AtaBuscarModo.DATE &&
-            (
-                (request.dataInicio() == null || request.dataFim() == null) ||
-                request.dataInicio().compareTo(request.dataFim()) > 0
-            )
-        )
-            throw new IllegalArgumentException("date period is invalid in date period mode");
-        
-        else if (request.modo() == AtaBuscarModo.GRUPO_ID && request.grupoId() == null)
-            throw new IllegalArgumentException("grupo id is empty in grupo id mode");
+                yield repository.findAllByRange(request.dataInicio(), request.dataFim());
+            }
+            case GRUPO_ID -> {
+                if (request.modo() == AtaBuscarModo.GRUPO_ID && request.grupoId() == null)
+                    throw new IllegalArgumentException("grupo id is empty in grupo id mode");
 
-        List<AtaGetPersistDTO> atas;
-
-        switch (request.modo()) {
-            case PALAVRA_CHAVE:
-                atas = repository.findAllByPalavraChave(request.palavraChave());
-                break;
-            case DATE:
-                atas = repository.findAllByRange(request.dataInicio(), request.dataFim());
-                break;
-            case GRUPO_ID:
-                atas = repository.findAllByGrupoId(request.grupoId());
-                break;
-            default:
-                atas = Arrays.asList();
-        }
+                yield repository.findAllByGrupoId(request.grupoId());
+            }
+            default -> repository.findAll();
+        };
 
         return atas
             .stream()
@@ -60,7 +45,17 @@ public class BuscarAtaUseCase {
             .collect(Collectors.toList());
     }
 
+    private boolean isDateRangeCorrect(AtaGetRequestDTO request) {
+        return request.dataInicio() != null &&
+            request.dataFim() != null &&
+            request.dataInicio().compareTo(request.dataFim()) <= 0;
+    }
+
     public AtaGetResponseDTO get(Long id) {
         return new AtaGetResponseDTO(repository.getReferenceById(id));
+    }
+
+    public PDF toPDF(Long id) {
+
     }
 }
