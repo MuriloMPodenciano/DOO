@@ -1,5 +1,6 @@
 package ifsp.doo.atas.domain.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ifsp.doo.atas.domain.DTO.ata.AtaGetRequestDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaPutRequestDTO;
 import ifsp.doo.atas.domain.DTO.ata.PreAtaPostRequestDTO;
@@ -34,13 +34,28 @@ public class AtaController {
     private EditarAtaUseCase editarAta;
 
     @GetMapping
-    public List<AtaGetResponseDTO> getAllAtas(@RequestBody AtaGetRequestDTO request) {
-        return buscarAta.getAll(request);
+    public List<AtaGetResponseDTO> getAllAtas() {
+        return buscarAta.getAll();
     }
 
     @GetMapping("/{id}")
     public AtaGetResponseDTO get(@PathVariable("id") Long id) {
         return buscarAta.get(id);
+    }
+
+    @GetMapping("/byPalavra/{palavra}")
+    public List<AtaGetResponseDTO> getAllAtasByPalavra(@PathVariable("palavra") String palavra) {
+        return buscarAta.getAllByPalavra(palavra);
+    }
+
+    @GetMapping("/byDate/{initialDate}/{finalDate}")
+    public List<AtaGetResponseDTO> getAllAtasByDate(@PathVariable("initialDate") LocalDateTime dataInicio, @PathVariable("finalDate") LocalDateTime dataFim) {
+        return buscarAta.getAllByDate(dataInicio, dataFim);
+    }
+
+    @GetMapping("/byGrupo/{id}")
+    public List<AtaGetResponseDTO> getAllAtasByGrupo(@PathVariable("id") Long id) {
+        return buscarAta.getAllByGrupo(id);
     }
 
     @PostMapping
