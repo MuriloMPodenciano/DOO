@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ifsp.doo.atas.domain.UI.pessoa.CriarPessoa"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="284.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ifsp.doo.atas.domain.UI.pessoa.CriarPessoa">
+   <Button layoutX="99.0" layoutY="227.0" mnemonicParsing="false" text="Salvar" AnchorPane.leftAnchor="99.0"/>
+   <Button layoutX="215.0" layoutY="227.0" mnemonicParsing="false" text="Voltar" AnchorPane.rightAnchor="73.0"/>
+   <Label layoutX="72.0" layoutY="92.0" text="Nome:" AnchorPane.leftAnchor="75.0"/>
+   <TextField layoutX="116.0" layoutY="88.0" promptText="Nome" AnchorPane.leftAnchor="116.0"
+              AnchorPane.rightAnchor="71.0"/>
+   <TextField layoutX="116.0" layoutY="129.0" promptText="Email" AnchorPane.leftAnchor="116.0"
+              AnchorPane.rightAnchor="71.0"/>
+   <Label layoutX="75.0" layoutY="133.0" text="Email:" AnchorPane.leftAnchor="75.0"/>
+   <Label layoutX="73.0" layoutY="174.0" text="Cargo:" AnchorPane.leftAnchor="73.0"/>
+   <TextField layoutX="116.0" layoutY="170.0" promptText="Cargo" AnchorPane.leftAnchor="116.0"
+              AnchorPane.rightAnchor="71.0"/>
+   <Label layoutX="97.0" layoutY="38.0" prefHeight="27.0" prefWidth="142.0" text="Cadastrar Pessoa"
+          AnchorPane.leftAnchor="97.0">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
 </AnchorPane>
