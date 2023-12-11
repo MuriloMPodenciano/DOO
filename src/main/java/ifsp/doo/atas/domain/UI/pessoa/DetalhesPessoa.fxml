@@ -7,7 +7,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="300.0" prefWidth="281.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ifsp.doo.atas.domain.UI.pessoa.DetalhesPessoa">
    <Button layoutX="62.0" layoutY="247.0" mnemonicParsing="false" onAction="#ButtonEditarPessoa" text="Editar"
