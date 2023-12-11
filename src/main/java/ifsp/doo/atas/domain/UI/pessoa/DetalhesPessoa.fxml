@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ifsp.doo.atas.domain.UI.pessoa.DetalhesPessoa"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="300.0" prefWidth="281.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ifsp.doo.atas.domain.UI.pessoa.DetalhesPessoa">
+   <Button layoutX="62.0" layoutY="247.0" mnemonicParsing="false" onAction="#ButtonEditarPessoa" text="Editar"
+           AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="62.0"/>
+   <Button layoutX="178.0" layoutY="247.0" mnemonicParsing="false" onAction="#ButtonVoltar" text="Voltar"
+           AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="55.0"/>
+   <Label layoutX="67.0" layoutY="95.0" text="Nome:" AnchorPane.leftAnchor="67.0"/>
+   <Label layoutX="69.0" layoutY="128.0" text="Email:" AnchorPane.leftAnchor="69.0"/>
+   <Label layoutX="67.0" layoutY="160.0" text="Cargo:" AnchorPane.leftAnchor="67.0"/>
+   <Label layoutX="70.0" layoutY="31.0" prefHeight="27.0" prefWidth="142.0" text="Detalhes Pessoa"
+          AnchorPane.topAnchor="31.0">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <Label fx:id="NomePessoa" layoutX="139.0" layoutY="95.0" text="nome" AnchorPane.rightAnchor="111.0"/>
+   <Label fx:id="EmailPessoa" layoutX="140.0" layoutY="128.0" text="email" AnchorPane.rightAnchor="112.0"/>
+   <Label fx:id="CargoPessoa" layoutX="140.0" layoutY="160.0" text="cargo" AnchorPane.rightAnchor="111.0"/>
+   <Label layoutX="67.0" layoutY="192.0" text="Status:" AnchorPane.leftAnchor="67.0"/>
+   <Label fx:id="StatusPessoa" layoutX="139.0" layoutY="192.0" text="status" AnchorPane.rightAnchor="110.0"/>
 </AnchorPane>
