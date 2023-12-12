@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ifsp.doo.atas.domain.UI.pessoa.EditarPessoa">
+   <Label layoutX="120.0" layoutY="32.0" prefHeight="27.0" prefWidth="142.0" text="Editar Pessoa">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="CargoPessoa" layoutX="116.0" layoutY="167.0" promptText="Cargo"/>
+   <Label layoutX="73.0" layoutY="171.0" text="Cargo:"/>
+   <Label layoutX="75.0" layoutY="130.0" text="Email:"/>
+   <TextField fx:id="EmailPessoa" layoutX="116.0" layoutY="126.0" promptText="Email"/>
+   <TextField fx:id="NomePessoa" layoutX="116.0" layoutY="85.0" promptText="Nome"/>
+   <Label layoutX="72.0" layoutY="89.0" text="Nome:"/>
+   <Button layoutX="215.0" layoutY="250.0" mnemonicParsing="false" onAction="#ButtonVoltar" text="Cancelar"/>
+   <Button layoutX="82.0" layoutY="250.0" mnemonicParsing="false" onAction="#ButtonSalvarPessoa" text="Salvar"/>
+   <CheckBox fx:id="CheckboxAtivo" layoutX="144.0" layoutY="210.0" mnemonicParsing="false" text="Ativo"/>
+</AnchorPane>
