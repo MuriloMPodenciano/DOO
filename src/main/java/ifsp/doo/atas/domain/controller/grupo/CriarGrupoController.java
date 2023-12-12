@@ -1,10 +1,17 @@
 package ifsp.doo.atas.domain.controller.grupo;
 
+import ifsp.doo.atas.domain.DTO.grupo.GrupoPostRequestDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
+import ifsp.doo.atas.domain.usecases.grupo.CadastrarGrupoUseCase;
+import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CriarGrupoController {
     @FXML
@@ -20,31 +27,47 @@ public class CriarGrupoController {
     private Button ButtonVoltar;
 
     @FXML
-    private ListView<?> ListViewMembros;
+    private ListView<PessoaGetPersistDTO> ListViewMembros;
 
     @FXML
-    private ListView<?> ListViewPessoas;
+    private ListView<PessoaGetPersistDTO> ListViewPessoas;
 
     @FXML
     private TextField TextFieldNome;
 
+    @Autowired
+    private BuscarPessoaUseCase buscarPessoa;
+    @Autowired
+    private CadastrarGrupoUseCase criarGrupo;
+
+    @FXML
+    public void initialize(){
+        ObservableList<PessoaGetPersistDTO> observableList = FXCollections.observableList(buscarPessoa.getAll());
+        ListViewPessoas.setItems(observableList);
+    }
+
     @FXML
     void adicionar(ActionEvent event) {
-
+        ListViewMembros.getItems().addAll(ListViewPessoas.getSelectionModel().getSelectedItems());
+        ListViewPessoas.getSelectionModel().getSelectedItems().removeAll();
     }
 
     @FXML
     void criar(ActionEvent event) {
-
+        ObservableList<PessoaGetPersistDTO> membros = FXCollections.observableList(ListViewMembros.getItems());
+        GrupoPostRequestDTO grupo = new GrupoPostRequestDTO(TextFieldNome.getText(), membros.stream().toList());
+        criarGrupo.cadastrarGrupo(grupo);
+//        retorno para a tela anterior e mensagem de sucesso
     }
 
     @FXML
     void remover(ActionEvent event) {
-
+        ListViewPessoas.getItems().addAll(ListViewMembros.getSelectionModel().getSelectedItems());
+        ListViewMembros.getSelectionModel().getSelectedItems().removeAll();
     }
 
     @FXML
     void voltar(ActionEvent event) {
-
+//        confirmar se deseja sair e retorno para tela anterior
     }
 }
