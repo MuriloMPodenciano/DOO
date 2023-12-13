@@ -7,11 +7,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="297.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ifsp.doo.atas.domain.UI.pessoa.ListarPessoa">
-   <Label layoutX="80.0" layoutY="43.0" prefHeight="27.0" prefWidth="142.0" text="Lista de Pessoas"
-          AnchorPane.topAnchor="43.0">
+   <Label layoutX="80.0" layoutY="65.0" prefHeight="27.0" prefWidth="142.0" text="Lista de Pessoas"
+          AnchorPane.topAnchor="65.0">
       <font>
          <Font size="18.0"/>
       </font>
@@ -23,4 +22,5 @@
            text="Detalhes" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="49.0"/>
    <Button layoutX="196.0" layoutY="353.0" mnemonicParsing="false" onAction="#ButtonVoltar" text="Voltar"
            AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="53.0"/>
+   <Button layoutX="9.0" layoutY="14.0" mnemonicParsing="false" onAction="#ButtonNovaPessoa" text="Nova pessoa"/>
 </AnchorPane>
