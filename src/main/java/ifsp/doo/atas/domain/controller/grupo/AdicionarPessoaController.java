@@ -49,4 +49,8 @@ public class AdicionarPessoaController {
     void cancelar(ActionEvent event) {
 
     }
+
+    public void setGrupoId(Long grupoId) {
+        this.grupoId = grupoId;
+    }
 }
