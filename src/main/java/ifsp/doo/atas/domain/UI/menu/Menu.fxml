@@ -7,22 +7,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="337.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-       <Button fx:id="ExitUsuario" layoutX="271.0" layoutY="15.0" mnemonicParsing="false" text="Deslogar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0" />
-       <Button fx:id="AddPessoa" layoutX="125.0" layoutY="117.0" mnemonicParsing="false" text="Nova" AnchorPane.leftAnchor="125.0" />
-       <Button fx:id="ListPessoa" layoutX="181.0" layoutY="117.0" mnemonicParsing="false" text="Lista" AnchorPane.leftAnchor="181.0" />
-       <Label layoutX="147.0" layoutY="27.0" text="Menu" textAlignment="CENTER" AnchorPane.topAnchor="27.0">
-           <font>
-             <Font name="System Bold" size="21.0" />
-           </font>
-       </Label>
-       <Label layoutX="156.0" layoutY="80.0" text="Pessoa" textAlignment="CENTER" AnchorPane.leftAnchor="156.0" />
-       <Label layoutX="158.0" layoutY="160.0" text="Grupo" textAlignment="CENTER" AnchorPane.leftAnchor="158.0" />
-       <Button fx:id="ListGrupo" layoutX="181.0" layoutY="184.0" mnemonicParsing="false" text="Lista" AnchorPane.leftAnchor="181.0" />
-       <Button fx:id="AddGrupo" layoutX="125.0" layoutY="184.0" mnemonicParsing="false" text="Novo" AnchorPane.leftAnchor="125.0" />
-       <Label layoutX="166.0" layoutY="226.0" text="Ata" textAlignment="CENTER" AnchorPane.leftAnchor="166.0" />
-       <Button fx:id="ListAta" layoutX="182.0" layoutY="251.0" mnemonicParsing="false" text="Lista" AnchorPane.leftAnchor="181.0" />
-       <Button fx:id="AddAta" layoutX="125.0" layoutY="251.0" mnemonicParsing="false" text="Nova" AnchorPane.leftAnchor="125.0" />
-   </children>
+<AnchorPane prefHeight="315.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <Button layoutX="271.0" layoutY="15.0" mnemonicParsing="false" onAction="#ExitUsuario" text="Deslogar"
+            AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0"/>
+    <Button layoutX="110.0" layoutY="90.0" mnemonicParsing="false" onAction="#ListPessoa" prefHeight="43.0"
+            prefWidth="131.0" text="Lista de Pessoas" AnchorPane.leftAnchor="110.0"/>
+    <Label layoutX="147.0" layoutY="27.0" text="Menu" textAlignment="CENTER" AnchorPane.topAnchor="27.0">
+        <font>
+            <Font name="System Bold" size="21.0"/>
+        </font>
+    </Label>
+    <Button layoutX="111.0" layoutY="147.0" mnemonicParsing="false" onAction="#ListGrupo" prefHeight="43.0"
+            prefWidth="131.0" text="Lista de Grupos"/>
+    <Button layoutX="111.0" layoutY="204.0" mnemonicParsing="false" onAction="#ListAta" prefHeight="43.0"
+            prefWidth="131.0" text="Lista de Atas"/>
 </AnchorPane>
