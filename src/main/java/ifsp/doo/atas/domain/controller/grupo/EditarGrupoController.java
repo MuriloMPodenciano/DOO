@@ -23,14 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 
 public class EditarGrupoController {
-    @FXML
-    private Button ButtonAdicionarPessoa;
 
     @FXML
     private Button ButtonEditar;
 
-    @FXML
-    private Button ButtonRemoverPessoa;
 
     @FXML
     private Button ButtonVoltar;
@@ -41,8 +37,6 @@ public class EditarGrupoController {
     @FXML
     private ListView<PessoaGetPersistDTO> ListViewMembros;
 
-    @FXML
-    private ListView<PessoaGetPersistDTO> ListViewPessoas;
 
     @FXML
     private TextField TextFieldNome;
@@ -61,11 +55,6 @@ public class EditarGrupoController {
     }
 
     @FXML
-    void adicionar(ActionEvent event) {
-
-    }
-
-    @FXML
     void editar(ActionEvent event) throws IOException {
         GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
         GrupoPutRequestDTO grupoModificado = new GrupoPutRequestDTO(grupoPersist.id(), CheckboxAtivo.isSelected());
@@ -76,11 +65,6 @@ public class EditarGrupoController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(detalhesGrupo);
         stage.show();
-    }
-
-    @FXML
-    void remover(ActionEvent event) {
-
     }
 
     @FXML
