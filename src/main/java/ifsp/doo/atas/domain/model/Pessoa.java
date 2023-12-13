@@ -26,11 +26,11 @@ public class Pessoa {
 
     public Pessoa(PessoaGetPersistDTO pessoaBanco) {
         this(
-            pessoaBanco.id(),
-            pessoaBanco.nome(),
-            new Email(pessoaBanco.email()),
-            pessoaBanco.cargo(),
-            pessoaBanco.status()
+            pessoaBanco.getId(),
+            pessoaBanco.getNome(),
+            new Email(pessoaBanco.getEmail()),
+            pessoaBanco.getCargo(),
+            pessoaBanco.getStatus()
         );
     }
 
@@ -58,5 +58,15 @@ public class Pessoa {
             cargo = pessoaDTO.cargo();
 
         status = pessoaDTO.status();
+    }
+
+    static Pessoa parsePessoa(PessoaGetResponseDTO pessoa) {
+        if (pessoa == null)
+            return null;
+        try {
+            return new Pessoa(pessoa);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

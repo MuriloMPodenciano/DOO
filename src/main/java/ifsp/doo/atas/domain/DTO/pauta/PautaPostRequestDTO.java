@@ -1,4 +1,6 @@
 package ifsp.doo.atas.domain.DTO.pauta;
 
-public record PautaPostRequestDTO(String nome, String descricao) {
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
+
+public record PautaPostRequestDTO(String pauta, PessoaGetResponseDTO pessoa) {
 }

@@ -2,48 +2,58 @@ package ifsp.doo.atas.domain.DTO.ata;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import ifsp.doo.atas.domain.DTO.encerramento.EncerramentoGetResponseDTO;
+import ifsp.doo.atas.domain.DTO.grupo.GrupoGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.informe.InformeGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.pauta.PautaGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
+import ifsp.doo.atas.domain.model.AtaState;
 
 public record AtaGetResponseDTO(
     Long id,
     String titulo,
-    String discussao,
+    String descricao,
     String textoAbertura,
     LocalDateTime dataInicio,
     LocalDateTime fimPrevisto,
     String local,
-    EncerramentoGetResponseDTO encerramento,
-    List<PessoaGetResponseDTO> listaPresenca,
+    GrupoGetResponseDTO grupo,
+    String textoEncerramento,
+    LocalDateTime horaEncerramento,
+    String nomeRedator,
+    Set<PessoaGetResponseDTO> listaPresenca,
     List<PautaGetResponseDTO> pautas,
-    List<InformeGetResponseDTO> informes
+    List<InformeGetResponseDTO> informes,
+    AtaState estado
 ) {
     public AtaGetResponseDTO(AtaGetPersistDTO ata) {
         this(
-            ata.id(),
-            ata.titulo(),
-            ata.discussao(),
-            ata.textoAbertura(),
-            ata.dataInicio(),
-            ata.fimPrevisto(),
-            ata.local(),
-            new EncerramentoGetResponseDTO(ata.encerramento()),
-            ata.listaPresenca()
+            ata.getId(),
+            ata.getTitulo(),
+            ata.getDescricao(),
+            ata.getTextoAbertura(),
+            ata.getDataInicio(),
+            ata.getFimPrevisto(),
+            ata.getLocal(),
+            new GrupoGetResponseDTO(ata.getGrupo()),
+            ata.getTextoEncerramento(),
+            ata.getHoraEncerramento(),
+            ata.getNomeRedator(),
+            ata.getListaPresenca()
                 .stream()
                 .map(PessoaGetResponseDTO::new)
-                .collect(Collectors.toList()),
-            ata.pautas()
+                .collect(Collectors.toSet()),
+            ata.getPautas()
                 .stream()
                 .map(PautaGetResponseDTO::new)
                 .collect(Collectors.toList()),
-            ata.informes()
+            ata.getInformes()
                 .stream()
                 .map(InformeGetResponseDTO::new)
-                .collect(Collectors.toList())
+                .collect(Collectors.toList()),
+            ata.getEstado()
         );
     }
 }

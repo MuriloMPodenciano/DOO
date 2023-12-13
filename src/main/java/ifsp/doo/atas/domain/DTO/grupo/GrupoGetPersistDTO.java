@@ -5,13 +5,27 @@ import java.util.stream.Collectors;
 
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public record GrupoGetPersistDTO(Long id, String nome, boolean status, List<PessoaGetPersistDTO> funcionarios) {
+@Entity
+@Table(name = "Grupo")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public class GrupoGetPersistDTO {
+    private Long id;
+    private String nome;
+    private Boolean status;
+    private List<PessoaGetPersistDTO> funcionarios;
     public GrupoGetPersistDTO(Grupo grupo) {
         this(
             grupo.getId(),
             grupo.getNome(),
-            grupo.isStatus(),
+            grupo.getStatus(),
             grupo.getFuncionarios()
                 .stream()
                 .map(PessoaGetPersistDTO::new)
