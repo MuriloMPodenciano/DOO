@@ -7,16 +7,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.doo.atas.domain.controller.grupo.EditarGrupoController">
    <Label layoutX="14.0" layoutY="14.0" text="Nome" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-   <TextField fx:id="TextFieldNome" layoutX="14.0" layoutY="30.0" promptText="Nome" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="30.0" />
-   <ListView fx:id="ListViewPessoas" layoutX="347.0" layoutY="96.0" prefHeight="208.0" prefWidth="188.0" AnchorPane.bottomAnchor="96.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="96.0" />
-   <ListView fx:id="ListViewMembros" layoutX="62.0" layoutY="96.0" prefHeight="208.0" prefWidth="188.0" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="96.0" />
+   <TextField fx:id="TextFieldNome" editable="false" layoutX="14.0" layoutY="30.0" promptText="Nome" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="30.0" />
+   <ListView fx:id="ListViewMembros" layoutX="14.0" layoutY="104.0" prefHeight="252.0" prefWidth="188.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="104.0" />
    <Button fx:id="ButtonVoltar" layoutX="524.0" layoutY="362.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
    <Button fx:id="ButtonEditar" layoutX="535.0" layoutY="30.0" mnemonicParsing="false" onAction="#editar" text="Editar" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
-   <Button fx:id="ButtonAdicionarPessoa" layoutX="260.0" layoutY="126.0" mnemonicParsing="false" onAction="#adicionar" text="Adicionar" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="126.0" />
-   <Button fx:id="ButtonRemoverPessoa" layoutX="260.0" layoutY="235.0" mnemonicParsing="false" onAction="#remover" text="Remover" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
-   <Label layoutX="62.0" layoutY="80.0" text="Membros" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="80.0" />
-   <Label layoutX="347.0" layoutY="80.0" text="Lista de Pessoas" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="80.0" />
+   <Label layoutX="14.0" layoutY="88.0" text="Membros" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="88.0" />
    <CheckBox fx:id="CheckboxAtivo" layoutX="271.0" layoutY="33.0" mnemonicParsing="false" text="Ativo" AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="33.0" />
 </AnchorPane>
