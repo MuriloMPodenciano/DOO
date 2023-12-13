@@ -70,16 +70,21 @@ public class ListarPessoaController {
 
     @FXML
     void ButtonDetalhesPessoa(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/interface/local-javafx/pessoa/DetalhesPessoa.fxml"));
-        Parent root = fxmlLoader.load();
+        PessoaGetPersistDTO selectedPessoa = listViewPessoas.getSelectionModel().getSelectedItem();
 
-        Stage dialogStage = new Stage();
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.initStyle(StageStyle.UNDECORATED);
-        dialogStage.setScene(new Scene(root));
+        if (selectedPessoa != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/interface/local-javafx/pessoa/DetalhesPessoa.fxml"));
+            Parent root = fxmlLoader.load();
 
-        dialogStage.showAndWait();
+            DetalhesPessoaController detalhesPessoaController = fxmlLoader.getController();
+            detalhesPessoaController.setPessoa(selectedPessoa);
 
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initStyle(StageStyle.UNDECORATED);
+            dialogStage.setScene(new Scene(root));
+
+            dialogStage.showAndWait();
+        }
     }
-
 }
