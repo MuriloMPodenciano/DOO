@@ -50,8 +50,13 @@ public class EditarGrupoController {
     @FXML
     public void initialize(){
         GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
+
         ObservableList<PessoaGetPersistDTO> membros = FXCollections.observableList(grupoPersist.funcionarios());
         ListViewMembros.setItems(membros);
+
+        CheckboxAtivo.setSelected(grupoPersist.status());
+
+        TextFieldNome.setText(grupoPersist.nome());
     }
 
     @FXML
