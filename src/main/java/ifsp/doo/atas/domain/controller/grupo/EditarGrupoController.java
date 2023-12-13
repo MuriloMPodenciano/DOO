@@ -1,5 +1,6 @@
 package ifsp.doo.atas.domain.controller.grupo;
 
+import ifsp.doo.atas.domain.model.Grupo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,6 +33,8 @@ public class EditarGrupoController {
     @FXML
     private TextField TextFieldNome;
 
+    private Grupo grupo;
+
     @FXML
     void adicionar(ActionEvent event) {
 
@@ -50,5 +53,9 @@ public class EditarGrupoController {
     @FXML
     void voltar(ActionEvent event) {
 
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 }
