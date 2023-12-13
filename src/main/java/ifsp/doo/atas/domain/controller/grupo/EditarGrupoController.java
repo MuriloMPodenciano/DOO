@@ -66,7 +66,7 @@ public class EditarGrupoController {
     }
 
     @FXML
-    void editar(ActionEvent event) {
+    void editar(ActionEvent event) throws IOException {
         GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
         GrupoPutRequestDTO grupoModificado = new GrupoPutRequestDTO(grupoPersist.id(), CheckboxAtivo.isSelected());
         editarGrupo.editarGrupo(grupoModificado);
