@@ -1,12 +1,12 @@
 package ifsp.doo.atas.UI.grupo;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoPutRequestDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.usecases.grupo.EditarGrupoUseCase;
 import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;
-import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
