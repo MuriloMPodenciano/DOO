@@ -5,7 +5,7 @@ import ifsp.doo.atas.domain.DTO.grupo.GrupoPostRequestDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.usecases.grupo.CadastrarGrupoUseCase;
 import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;
-=import javafx.collections.FXCollections;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
