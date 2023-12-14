@@ -6,4 +6,8 @@ public class CadastrarUsuarioUseCase {
     public void cadastrarUsuario(String usuario) {
         Usuario.setNome(usuario);
     }
+
+    public boolean estaCadastrado() {
+        return Usuario.isValid();
+    }
 }

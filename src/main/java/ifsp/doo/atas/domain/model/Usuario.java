@@ -15,4 +15,8 @@ public class Usuario {
 
         Usuario.nome = nome;
     }
+
+    public static boolean isValid() {
+        return Usuario.nome != null;
+    }
 }

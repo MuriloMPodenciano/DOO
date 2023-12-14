@@ -1,4 +1,4 @@
-package ifsp.doo.atas.domain.utils;
+package ifsp.doo.atas.UI.utils;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ifsp.doo.atas.domain.DTO.discussao.DiscussaoGetPersistDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.model.Pauta;
 import ifsp.doo.atas.domain.model.PautaState;
-import ifsp.doo.atas.domain.model.Pessoa;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +33,7 @@ public class PautaGetPersistDTO {
     private String pauta;
 
     @ManyToOne
-    private Pessoa pessoa;
+    private PessoaGetPersistDTO pessoa;
 
     @OneToMany
     @OrderColumn
@@ -47,7 +47,7 @@ public class PautaGetPersistDTO {
         this(
             pauta.getId(),
             pauta.getPauta(),
-            pauta.getPessoa(),
+            new PessoaGetPersistDTO(pauta.getPessoa()),
             pauta.getDiscussoes()
                 .stream()
                 .map(DiscussaoGetPersistDTO::new)

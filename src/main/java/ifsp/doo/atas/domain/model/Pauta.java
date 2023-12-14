@@ -36,7 +36,7 @@ public class Pauta {
         this(
             dto.getId(),
             dto.getPauta(),
-            dto.getPessoa(),
+            new Pessoa(dto.getPessoa()),
             dto.getDiscussoes()
                 .stream()
                 .map(Discussao::new)

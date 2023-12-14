@@ -1,13 +1,11 @@
 package ifsp.doo.atas.domain.usecases.ata;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ifsp.doo.atas.domain.DTO.ata.AtaGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetResponseDTO;
 import ifsp.doo.atas.domain.repository.AtaRepository;
 
@@ -61,7 +59,7 @@ public class BuscarAtaUseCase {
         return new AtaGetResponseDTO(repository.getReferenceById(id));
     }
 
-    public PDF toPDF(Long id) {
+    // public PDF toPDF(Long id) {
 
-    }
+    // }
 }
