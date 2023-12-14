@@ -1,6 +1,8 @@
 package ifsp.doo.atas.domain.controller.pessoa;
 
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaPutRequestDTO;
+import ifsp.doo.atas.domain.usecases.pessoa.EditarPessoaUseCase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +34,8 @@ public class EditarPessoaController {
     @FXML
     private CheckBox CheckboxAtivo;
 
+    private EditarPessoaUseCase editarPessoaUseCase;
+
     private PessoaGetPersistDTO pessoa;
 
     public void setPessoa(PessoaGetPersistDTO pessoa) {
@@ -57,5 +61,16 @@ public class EditarPessoaController {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    private void ButtonSalvarPessoa(ActionEvent event) throws IOException {
+        PessoaPutRequestDTO putDTO = new PessoaPutRequestDTO(
+                pessoa.getId(),
+                pessoa.getCargo(),
+                pessoa.getStatus()
+        );
 
+        editarPessoaUseCase.editarPessoa(putDTO);
+
+        ButtonVoltar(event);
+    }
 }
