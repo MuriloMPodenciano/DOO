@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="284.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ifsp.doo.atas.domain.UI.pessoa.CriarPessoa">
+            fx:controller="ifsp.doo.atas.domain.controller.pessoa.CriarPessoaController">
    <Button layoutX="99.0" layoutY="227.0" mnemonicParsing="false" onAction="#ButtonSalvarPessoa" text="Salvar"
            AnchorPane.leftAnchor="99.0"/>
    <Button layoutX="215.0" layoutY="227.0" mnemonicParsing="false" onAction="#ButtonVoltar" text="Voltar"
