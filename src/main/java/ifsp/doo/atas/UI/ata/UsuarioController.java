@@ -2,7 +2,6 @@ package ifsp.doo.atas.UI.ata;
 
 import java.io.IOException;
 
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ifsp.doo.atas.UI.AtasReuniaoApplication;
@@ -16,7 +15,6 @@ public class UsuarioController {
     @FXML
     private TextField nome;
 
-    // @Autowired
     private CadastrarUsuarioUseCase cadastrarUseCase = new CadastrarUsuarioUseCase();
 
     @FXML
