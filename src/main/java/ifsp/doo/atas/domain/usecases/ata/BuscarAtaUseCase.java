@@ -81,87 +81,113 @@ public class BuscarAtaUseCase {
             PdfWriter writer = PdfWriter.getInstance(pdf, new FileOutputStream(ata.titulo()));
             pdf.open();
 
-            pdf.addAuthor(ata.nomeRedator());
-            pdf.addCreator("MinutesMeet");
-            pdf.addCreationDate();
-            pdf.addTitle(ata.titulo());
-            pdf.addSubject(ata.descricao());
+            setMetadata(pdf, ata);
 
-            Paragraph titulo = new Paragraph(ata.titulo(), fonteTitulo);
-            titulo.setAlignment(Paragraph.ALIGN_CENTER);
-            pdf.add(titulo);
-            pdf.newPage();
+            createTitlePage(pdf, ata, fonteTitulo);
 
-            Chapter inicioFim = new Chapter(new Paragraph("Inicio e término", fonteSubTitulo), qtdCapitulos);
-            pdf.add(inicioFim);
-            qtdCapitulos++;
-            com.itextpdf.text.List datas = new com.itextpdf.text.List(com.itextpdf.text.List.UNORDERED);
-            datas.add("Inicio: " + ata.dataInicio());
-            if (ata.horaEncerramento() == null){
-                datas.add(new Paragraph("Fim previsto: " + ata.fimPrevisto(), fonteParagrafo));
-            }else{
-                datas.add(new Paragraph("Término: " + ata.horaEncerramento(), fonteParagrafo));
-            }
-            pdf.add(datas);
-            pdf.add(new Paragraph(""));
+            createCreationTime(pdf, ata, fonteSubTitulo, fonteParagrafo);
 
-            Chapter descricao = new Chapter(new Paragraph("Descrição", fonteSubTitulo), qtdCapitulos);
-            pdf.add(descricao);
-            qtdCapitulos++;
-            pdf.add(new Paragraph(ata.descricao()));
-            pdf.add(new Paragraph("Redator: " + ata.nomeRedator(), fonteParagrafo));
-            pdf.newPage();
+            createDescricao(pdf, ata, fonteSubTitulo, fonteParagrafo);
 
-            Chapter abertura = new Chapter(new Paragraph("Abertura", fonteSubTitulo), qtdCapitulos);
-            pdf.add(abertura);
-            qtdCapitulos++;
-            pdf.add(new Paragraph(ata.textoAbertura()));
-            if(ata.estado().equals(AtaState.FINISHED)){
-                Chapter encerramento = new Chapter(new Paragraph("Encerramento", fonteSubTitulo), qtdCapitulos);
-                pdf.add(encerramento);
-                qtdCapitulos++;
-                pdf.add(new Paragraph(ata.textoEncerramento(), fonteParagrafo));
-            }
-            pdf.newPage();
+            createCriacaoEncerramento(pdf, ata, fonteSubTitulo, fonteParagrafo);
 
-            List<InformeGetResponseDTO> informes = ata.informes();
-            Chapter capituloInforme = new Chapter(new Paragraph("Informe", fonteSubTitulo), qtdCapitulos);
-            pdf.add(capituloInforme);
-            qtdCapitulos++;
-            PdfPTable tabelaInforme = new PdfPTable(3);
-            tabelaInforme.setWidthPercentage(80);
-            PdfPCell celulaTituloInforme = new PdfPCell(new Phrase("Informe"));
-            celulaTituloInforme.setHorizontalAlignment(Element.ALIGN_CENTER);
-            celulaTituloInforme.setVerticalAlignment(Element.ALIGN_CENTER);
-            tabelaInforme.addCell(celulaTituloInforme);
-            PdfPCell celulaTituloPessoa = new PdfPCell(new Phrase("Pessoa"));
-            celulaTituloPessoa.setHorizontalAlignment(Element.ALIGN_CENTER);
-            celulaTituloPessoa.setVerticalAlignment(Element.ALIGN_CENTER);
-            tabelaInforme.addCell(celulaTituloPessoa);
-            PdfPCell celulaTituloInformado = new PdfPCell(new Phrase("Informado"));
-            celulaTituloInformado.setHorizontalAlignment(Element.ALIGN_CENTER);
-            celulaTituloInformado.setVerticalAlignment(Element.ALIGN_CENTER);
-            tabelaInforme.addCell(celulaTituloInformado);
-            for(InformeGetResponseDTO informe : informes){
-                PdfPCell celulaInforme = new PdfPCell(new Phrase(informe.informe()));
-                celulaInforme.setHorizontalAlignment(Element.ALIGN_CENTER);
-                celulaInforme.setVerticalAlignment(Element.ALIGN_CENTER);
-                tabelaInforme.addCell(celulaInforme);
-                PdfPCell celulaPessoa = new PdfPCell(new Phrase(informe.pessoa().nome()));
-                celulaPessoa.setHorizontalAlignment(Element.ALIGN_CENTER);
-                celulaPessoa.setVerticalAlignment(Element.ALIGN_CENTER);
-                tabelaInforme.addCell(celulaPessoa);
-                PdfPCell celulaInformado = new PdfPCell(new Phrase("Informado"));
-                celulaInformado.setHorizontalAlignment(Element.ALIGN_CENTER);
-                celulaInformado.setVerticalAlignment(Element.ALIGN_CENTER);
-                tabelaInforme.addCell(celulaInformado);
-            }
-            pdf.newPage();
+            createTableInforme(pdf, ata, fonteSubTitulo, fonteParagrafo);
 
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setMetadata(Document pdf, AtaGetResponseDTO ata){
+        pdf.addAuthor(ata.nomeRedator());
+        pdf.addCreator("MinutesMeet");
+        pdf.addCreationDate();
+        pdf.addTitle(ata.titulo());
+        pdf.addSubject(ata.descricao());
+    }
+    public void createTitlePage(Document pdf, AtaGetResponseDTO ata, Font fonteTitulo) throws DocumentException {
+        Paragraph titulo = new Paragraph(ata.titulo(), fonteTitulo);
+        titulo.setAlignment(Paragraph.ALIGN_CENTER);
+        pdf.add(titulo);
+        pdf.newPage();
+    }
+
+    public void createCreationTime(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
+        Chapter inicioFim = new Chapter(new Paragraph("Inicio e término", fonteSubTitulo), 1);
+        pdf.add(inicioFim);
+        com.itextpdf.text.List datas = new com.itextpdf.text.List(com.itextpdf.text.List.UNORDERED);
+        datas.add("Inicio: " + ata.dataInicio());
+        if (ata.horaEncerramento() == null){
+            datas.add(new Paragraph("Fim previsto: " + ata.fimPrevisto(), fonteParagrafo));
+        }else{
+            datas.add(new Paragraph("Término: " + ata.horaEncerramento(), fonteParagrafo));
+        }
+        pdf.add(datas);
+        pdf.add(new Paragraph(""));
+    }
+
+    public void createDescricao(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
+        Chapter descricao = new Chapter(new Paragraph("Descrição", fonteSubTitulo), 2);
+        pdf.add(descricao);
+        pdf.add(new Paragraph(ata.descricao()));
+        pdf.add(new Paragraph("Redator: " + ata.nomeRedator(), fonteParagrafo));
+        pdf.newPage();
+    }
+
+    public void createCriacaoEncerramento(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
+        Chapter abertura = new Chapter(new Paragraph("Abertura", fonteSubTitulo), 3);
+        pdf.add(abertura);
+        pdf.add(new Paragraph(ata.textoAbertura()));
+        Chapter encerramento = new Chapter(new Paragraph("Encerramento", fonteSubTitulo), 4);
+        pdf.add(encerramento);
+        if(ata.estado().equals(AtaState.FINISHED)){
+            pdf.add(new Paragraph(ata.textoEncerramento(), fonteParagrafo));
+        }
+        pdf.newPage();
+    }
+
+    public void createTableInforme(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
+        List<InformeGetResponseDTO> informes = ata.informes();
+
+        Chapter capituloInforme = new Chapter(new Paragraph("Informe", fonteSubTitulo), 5);
+        pdf.add(capituloInforme);
+
+        PdfPTable tabelaInforme = new PdfPTable(3);
+        tabelaInforme.setWidthPercentage(80);
+
+        PdfPCell celulaTituloInforme = new PdfPCell(new Phrase("Informe"));
+        celulaTituloInforme.setHorizontalAlignment(Element.ALIGN_CENTER);
+        celulaTituloInforme.setVerticalAlignment(Element.ALIGN_CENTER);
+        tabelaInforme.addCell(celulaTituloInforme);
+
+        PdfPCell celulaTituloPessoa = new PdfPCell(new Phrase("Pessoa"));
+        celulaTituloPessoa.setHorizontalAlignment(Element.ALIGN_CENTER);
+        celulaTituloPessoa.setVerticalAlignment(Element.ALIGN_CENTER);
+        tabelaInforme.addCell(celulaTituloPessoa);
+
+        PdfPCell celulaTituloInformado = new PdfPCell(new Phrase("Informado"));
+        celulaTituloInformado.setHorizontalAlignment(Element.ALIGN_CENTER);
+        celulaTituloInformado.setVerticalAlignment(Element.ALIGN_CENTER);
+        tabelaInforme.addCell(celulaTituloInformado);
+
+        for(InformeGetResponseDTO informe : informes){
+            PdfPCell celulaInforme = new PdfPCell(new Phrase(informe.informe()));
+            celulaInforme.setHorizontalAlignment(Element.ALIGN_CENTER);
+            celulaInforme.setVerticalAlignment(Element.ALIGN_CENTER);
+            tabelaInforme.addCell(celulaInforme);
+
+            PdfPCell celulaPessoa = new PdfPCell(new Phrase(informe.pessoa().nome()));
+            celulaPessoa.setHorizontalAlignment(Element.ALIGN_CENTER);
+            celulaPessoa.setVerticalAlignment(Element.ALIGN_CENTER);
+            tabelaInforme.addCell(celulaPessoa);
+
+            PdfPCell celulaInformado = new PdfPCell(new Phrase("Informado"));
+            celulaInformado.setHorizontalAlignment(Element.ALIGN_CENTER);
+            celulaInformado.setVerticalAlignment(Element.ALIGN_CENTER);
+            tabelaInforme.addCell(celulaInformado);
+        }
+        pdf.newPage();
     }
 }
