@@ -48,7 +48,7 @@ public class EditarGrupoUseCase {
 
         Grupo grupo = new Grupo(grupoBanco);
 
-        for(PessoaGetResponseDTO funcionario : funcionarios){
+        for(PessoaGetPersistDTO funcionario : funcionarios){
             grupo.inserirFuncionario(new Pessoa(funcionario));
         }
 
