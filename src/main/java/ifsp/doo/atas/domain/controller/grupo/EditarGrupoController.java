@@ -6,6 +6,7 @@ import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.usecases.grupo.EditarGrupoUseCase;
 import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;
+import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -73,12 +74,8 @@ public class EditarGrupoController {
     }
 
     @FXML
-    void voltar(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.DetalhesGrupo"));
-        Scene detalhesGrupo = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(detalhesGrupo);
-        stage.show();
+    void voltar(ActionEvent event) {
+        ControllerUtil.closeWindow(event);
     }
 
     public void setGrupo(Grupo grupo) {

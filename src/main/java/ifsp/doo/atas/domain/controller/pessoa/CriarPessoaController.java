@@ -2,6 +2,7 @@ package ifsp.doo.atas.domain.controller.pessoa;
 
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaPostRequestDTO;
 import ifsp.doo.atas.domain.usecases.pessoa.CadastrarPessoaUseCase;
+import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,9 +34,8 @@ public class CriarPessoaController {
     }
 
     @FXML
-    void ButtonVoltar(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    void ButtonVoltar(ActionEvent event) {
+        ControllerUtil.closeWindow(event);
     }
 
     @FXML
