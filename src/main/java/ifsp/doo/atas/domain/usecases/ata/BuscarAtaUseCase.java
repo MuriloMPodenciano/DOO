@@ -107,6 +107,8 @@ public class BuscarAtaUseCase {
     }
 
     private void createListPauta(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
+        pdf.newPage();
+
         List<PautaGetResponseDTO> pautas = ata.pautas();
 
         Font fonteNomePauta = FontFactory.getFont(FontFactory.TIMES_BOLD, 14, BaseColor.BLACK);
@@ -163,10 +165,10 @@ public class BuscarAtaUseCase {
         pdf.add(descricao);
         pdf.add(new Paragraph(ata.descricao()));
         pdf.add(new Paragraph("Redator: " + ata.nomeRedator(), fonteParagrafo));
-        pdf.newPage();
     }
 
     public void createCriacaoEncerramento(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
+        pdf.newPage();
         Chapter abertura = new Chapter(new Paragraph("Abertura", fonteSubTitulo), 3);
         pdf.add(abertura);
         pdf.add(new Paragraph(ata.textoAbertura()));
@@ -175,10 +177,11 @@ public class BuscarAtaUseCase {
         if(ata.estado().equals(AtaState.FINISHED)){
             pdf.add(new Paragraph(ata.textoEncerramento(), fonteParagrafo));
         }
-        pdf.newPage();
+
     }
 
     public void createTableInforme(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
+        pdf.newPage();
         List<InformeGetResponseDTO> informes = ata.informes();
 
         Chapter capituloInforme = new Chapter(new Paragraph("Informe", fonteSubTitulo), 5);
@@ -218,6 +221,6 @@ public class BuscarAtaUseCase {
             celulaInformado.setVerticalAlignment(Element.ALIGN_CENTER);
             tabelaInforme.addCell(celulaInformado);
         }
-        pdf.newPage();
+
     }
 }
