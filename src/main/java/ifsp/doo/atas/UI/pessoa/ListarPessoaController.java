@@ -23,7 +23,7 @@ public class ListarPessoaController {
     @FXML
     private Button ButtonNovaPessoa;
     @FXML
-    private ListView<PessoaGetPersistDTO> listViewPessoas;
+    private ListView<PessoaGetPersistDTO> ListViewPessoas;
 
     private BuscarPessoaUseCase buscarPessoaUseCase;
 
@@ -36,7 +36,7 @@ public class ListarPessoaController {
 
         ObservableList<PessoaGetPersistDTO> observableList = FXCollections.observableArrayList(pessoas);
 
-        listViewPessoas.setItems(observableList);
+        ListViewPessoas.setItems(observableList);
     }
 
     @FXML
@@ -51,7 +51,7 @@ public class ListarPessoaController {
 
     @FXML
     void ButtonDetalhesPessoa(ActionEvent event) throws IOException {
-        PessoaGetPersistDTO selectedPessoa = listViewPessoas.getSelectionModel().getSelectedItem();
+        PessoaGetPersistDTO selectedPessoa = ListViewPessoas.getSelectionModel().getSelectedItem();
 
         if (selectedPessoa != null) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/UI/pessoa/DetalhesPessoa.fxml"));
