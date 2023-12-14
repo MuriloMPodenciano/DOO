@@ -1,4 +1,4 @@
-package ifsp.doo.atas.domain.controller.pessoa;
+package ifsp.doo.atas.UI.pessoa;
 
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;

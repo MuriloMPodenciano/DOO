@@ -1,4 +1,4 @@
-package ifsp.doo.atas.domain.controller.grupo;
+package ifsp.doo.atas.UI.grupo;
 
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;

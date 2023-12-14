@@ -1,6 +1,7 @@
 package ifsp.doo.atas.domain.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import ifsp.doo.atas.domain.usecases.ata.EditarDiscussaoUseCase;
 
 @RestController
 @RequestMapping("/ata/{id}/pautas/{pautaId}/discussoes")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DiscussaoController {
     @Autowired
     private EditarDiscussaoUseCase editarDiscussao;

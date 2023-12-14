@@ -1,6 +1,5 @@
-package ifsp.doo.atas.domain.controller.grupo;
+package ifsp.doo.atas.UI.grupo;
 
-import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoPostRequestDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.usecases.grupo.CadastrarGrupoUseCase;

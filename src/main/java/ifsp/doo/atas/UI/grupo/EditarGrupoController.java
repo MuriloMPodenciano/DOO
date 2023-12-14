@@ -1,4 +1,4 @@
-package ifsp.doo.atas.domain.controller.grupo;
+package ifsp.doo.atas.UI.grupo;
 
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoPutRequestDTO;
@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 
 public class EditarGrupoController {
-
     @FXML
     private Button ButtonEditar;
 
@@ -43,8 +42,8 @@ public class EditarGrupoController {
     private TextField TextFieldNome;
 
     private Grupo grupo;
-    @Autowired
-    private BuscarPessoaUseCase buscarPessoa;
+    // @Autowired
+    // private BuscarPessoaUseCase buscarPessoa;
     @Autowired
     private EditarGrupoUseCase editarGrupo;
 
@@ -62,15 +61,15 @@ public class EditarGrupoController {
 
     @FXML
     void editar(ActionEvent event) throws IOException {
-        GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
-        GrupoPutRequestDTO grupoModificado = new GrupoPutRequestDTO(grupoPersist.id(), CheckboxAtivo.isSelected());
-        editarGrupo.editarGrupo(grupoModificado);
+        // GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
+        // GrupoPutRequestDTO grupoModificado = new GrupoPutRequestDTO(grupoPersist.id(), CheckboxAtivo.isSelected());
+        // editarGrupo.editarGrupo(grupoModificado);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.DetalhesGrupo"));
-        Scene detalhesGrupo = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(detalhesGrupo);
-        stage.show();
+        // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.DetalhesGrupo"));
+        // Scene detalhesGrupo = new Scene(fxmlLoader.load());
+        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        // stage.setScene(detalhesGrupo);
+        // stage.show();
     }
 
     @FXML

@@ -3,7 +3,6 @@ package ifsp.doo.atas.domain.usecases.grupo;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoPutRequestDTO;
-import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.model.Pessoa;
