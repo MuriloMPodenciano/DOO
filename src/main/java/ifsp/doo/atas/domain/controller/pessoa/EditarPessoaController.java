@@ -53,13 +53,8 @@ public class EditarPessoaController {
     }
     @FXML
     void ButtonVoltar(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/interface/local-javafx/pessoa/DetalhesPessoa.fxml"));
-        Parent root = fxmlLoader.load();
-
-        Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        stage.close();
     }
     @FXML
     private void ButtonSalvarPessoa(ActionEvent event) throws IOException {
