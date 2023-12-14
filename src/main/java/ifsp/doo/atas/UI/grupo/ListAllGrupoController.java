@@ -44,7 +44,7 @@ public class ListAllGrupoController {
     @FXML
     void detalhes(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.DetalhesGrupo"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/UI/grupo/DetalhesGrupo.fxml"));
             Scene detalhesGrupo = new Scene(fxmlLoader.load());
             DetalhesGrupoController detalhesGrupoController = fxmlLoader.getController();
             detalhesGrupoController.setGrupo(new Grupo(ListViewGrupos.getSelectionModel().getSelectedItem()));

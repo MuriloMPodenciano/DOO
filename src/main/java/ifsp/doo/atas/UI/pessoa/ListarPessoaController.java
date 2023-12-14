@@ -8,13 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,16 +45,8 @@ public class ListarPessoaController {
     }
 
     @FXML
-    void ButtonNovaPessoa(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/interface/local-javafx/pessoa/Criarpessoa.fxml"));
-        Parent root = fxmlLoader.load();
-
-        Stage dialogStage = new Stage();
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.initStyle(StageStyle.UNDECORATED);
-        dialogStage.setScene(new Scene(root));
-
-        dialogStage.showAndWait();
+    void ButtonNovaPessoa(ActionEvent event) {
+        ControllerUtil.changeScene(event,"java/ifsp/doo/atas/UI/pessoa/CriarPessoa.fxml" );
     }
 
     @FXML
@@ -67,18 +54,12 @@ public class ListarPessoaController {
         PessoaGetPersistDTO selectedPessoa = listViewPessoas.getSelectionModel().getSelectedItem();
 
         if (selectedPessoa != null) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/interface/local-javafx/pessoa/DetalhesPessoa.fxml"));
-            Parent root = fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/UI/pessoa/DetalhesPessoa.fxml"));
 
             DetalhesPessoaController detalhesPessoaController = fxmlLoader.getController();
             detalhesPessoaController.setPessoa(selectedPessoa);
 
-            Stage dialogStage = new Stage();
-            dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.initStyle(StageStyle.UNDECORATED);
-            dialogStage.setScene(new Scene(root));
-
-            dialogStage.showAndWait();
+            ControllerUtil.changeScene(event, "java/ifsp/doo/atas/UI/pessoa/DetalhesPessoa.fxml");
         }
     }
 }
