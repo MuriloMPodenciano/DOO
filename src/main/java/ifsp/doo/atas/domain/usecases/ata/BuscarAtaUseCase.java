@@ -82,7 +82,7 @@ public class BuscarAtaUseCase {
         Font fonteParagrafo = FontFactory.getFont(FontFactory.TIMES_ROMAN, Font.DEFAULTSIZE, BaseColor.BLACK);
         Document pdf = new Document();
         try{
-            PdfWriter writer = PdfWriter.getInstance(pdf, new FileOutputStream(ata.titulo()));
+            PdfWriter writer = PdfWriter.getInstance(pdf, new FileOutputStream(ata.titulo() + ".pdf"));
             pdf.open();
 
             setMetadata(pdf, ata);
