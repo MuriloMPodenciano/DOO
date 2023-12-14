@@ -47,24 +47,20 @@ public class DetalhesGrupoController {
     @FXML
     void adicionarPessoa(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.ListAllGrupo"));
-        Scene scene = new Scene(fxmlLoader.load());
         AdicionarPessoaController controller = fxmlLoader.getController();
         GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
         controller.setGrupoId(grupoPersist.id());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+
+        ControllerUtil.changeScene(event, "ifsp.doo.atas.domain.UI.grupo.ListAllGrupo");
     }
 
     @FXML
     void editar(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.EditarGrupo"));
-        Scene scene = new Scene(fxmlLoader.load());
         EditarGrupoController controller = fxmlLoader.getController();
         controller.setGrupo(grupo);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+
+        ControllerUtil.changeScene(event, "ifsp.doo.atas.domain.UI.grupo.EditarGrupo");
     }
 
     @FXML

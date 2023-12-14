@@ -48,11 +48,7 @@ public class AdicionarPessoaController {
     void adicionar(ActionEvent event) throws IOException {
         ObservableList<PessoaGetPersistDTO> selecionados = ListViewPessoas.getSelectionModel().getSelectedItems();
         editarGrupo.addFuncionarios(grupoId, selecionados.stream().toList());
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.DetalhesGrupo"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        ControllerUtil.closeWindow(event);
     }
 
     @FXML

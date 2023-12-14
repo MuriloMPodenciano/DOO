@@ -3,6 +3,7 @@ package ifsp.doo.atas.domain.usecases.grupo;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoPutRequestDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.model.Pessoa;
@@ -42,7 +43,7 @@ public class EditarGrupoUseCase {
         return new GrupoGetResponseDTO(repository.save(grupoAtualizado));
     }
 
-    public GrupoGetResponseDTO addFuncionarios(Long id, List<PessoaGetResponseDTO> funcionarios){
+    public GrupoGetResponseDTO addFuncionarios(Long id, List<PessoaGetPersistDTO> funcionarios){
         GrupoGetPersistDTO grupoBanco = repository.getReferenceById(id);
 
         Grupo grupo = new Grupo(grupoBanco);

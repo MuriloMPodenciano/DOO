@@ -61,15 +61,11 @@ public class EditarGrupoController {
 
     @FXML
     void editar(ActionEvent event) throws IOException {
-        // GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
-        // GrupoPutRequestDTO grupoModificado = new GrupoPutRequestDTO(grupoPersist.id(), CheckboxAtivo.isSelected());
-        // editarGrupo.editarGrupo(grupoModificado);
+         GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
+         GrupoPutRequestDTO grupoModificado = new GrupoPutRequestDTO(grupoPersist.id(), CheckboxAtivo.isSelected());
+         editarGrupo.editarGrupo(grupoModificado);
 
-        // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.DetalhesGrupo"));
-        // Scene detalhesGrupo = new Scene(fxmlLoader.load());
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // stage.setScene(detalhesGrupo);
-        // stage.show();
+         voltar(event);
     }
 
     @FXML
