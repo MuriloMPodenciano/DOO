@@ -73,7 +73,6 @@ public class BuscarAtaUseCase {
 
     public void toPDF(Long id) {
         AtaGetResponseDTO ata = get(id);
-        int qtdCapitulos = 1;
 
         Font fonteTitulo = FontFactory.getFont(FontFactory.TIMES_ROMAN, 24, BaseColor.BLUE);
         Font fonteSubTitulo = FontFactory.getFont(FontFactory.TIMES_ROMAN, 16, BaseColor.BLACK);
