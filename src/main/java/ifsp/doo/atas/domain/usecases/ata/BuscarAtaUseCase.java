@@ -5,13 +5,17 @@ import java.io.FileOutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import ifsp.doo.atas.domain.DTO.discussao.DiscussaoGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.informe.InformeGetResponseDTO;
+import ifsp.doo.atas.domain.DTO.pauta.PautaGetResponseDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 import ifsp.doo.atas.domain.model.AtaState;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -93,10 +97,35 @@ public class BuscarAtaUseCase {
 
             createTableInforme(pdf, ata, fonteSubTitulo, fonteParagrafo);
 
+            createListPauta(pdf, ata, fonteSubTitulo, fonteParagrafo);
+
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void createListPauta(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
+        List<PautaGetResponseDTO> pautas = ata.pautas();
+
+        Font fonteNomePauta = FontFactory.getFont(FontFactory.TIMES_BOLD, 14, BaseColor.BLACK);
+
+        Chapter capituloPautas = new Chapter(new Paragraph("Pautas", fonteSubTitulo), 6);
+        pdf.add(capituloPautas);
+
+        for(PautaGetResponseDTO pauta : pautas){
+            pdf.add(new Paragraph(pauta.pauta(), fonteNomePauta));
+
+            pdf.add(new Paragraph("Estado: " + pauta.estado(), fonteParagrafo));
+            pdf.add(new Paragraph("Pessoa: " + pauta.pessoa(), fonteParagrafo));
+            pdf.add(new Paragraph("Decisão: " + pauta.decisao(), fonteParagrafo));
+
+            pdf.add(new Paragraph("Discussões", fonteParagrafo));
+            for(DiscussaoGetResponseDTO discussao : pauta.discussoes()){
+                pdf.add(new Paragraph("Pessoa: " + discussao.pessoa().nome(), fonteParagrafo));
+                pdf.add(new Paragraph("Discussão: " + discussao.discussao(), fonteParagrafo));
+            }
         }
     }
 
@@ -117,6 +146,7 @@ public class BuscarAtaUseCase {
     public void createCreationTime(Document pdf, AtaGetResponseDTO ata, Font fonteSubTitulo, Font fonteParagrafo) throws DocumentException {
         Chapter inicioFim = new Chapter(new Paragraph("Inicio e término", fonteSubTitulo), 1);
         pdf.add(inicioFim);
+
         com.itextpdf.text.List datas = new com.itextpdf.text.List(com.itextpdf.text.List.UNORDERED);
         datas.add("Inicio: " + ata.dataInicio());
         if (ata.horaEncerramento() == null){
