@@ -2,6 +2,7 @@ package ifsp.doo.atas.UI.pessoa;
 
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;
+import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,9 +46,8 @@ public class ListarPessoaController {
     }
 
     @FXML
-    void ButtonVoltar(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    void ButtonVoltar(ActionEvent event) {
+        ControllerUtil.closeWindow(event);
     }
 
     @FXML

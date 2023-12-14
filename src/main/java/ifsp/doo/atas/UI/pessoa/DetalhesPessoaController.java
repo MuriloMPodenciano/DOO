@@ -1,6 +1,7 @@
 package ifsp.doo.atas.UI.pessoa;
 
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
+import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,9 +46,8 @@ public class DetalhesPessoaController {
         }
     }
     @FXML
-    void ButtonVoltar(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    void ButtonVoltar(ActionEvent event) {
+        ControllerUtil.closeWindow(event);
     }
     @FXML
     private void ButtonEditarPessoa(ActionEvent event) throws IOException {
