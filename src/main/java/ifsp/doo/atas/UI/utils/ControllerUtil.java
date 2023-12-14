@@ -1,6 +1,5 @@
 package ifsp.doo.atas.UI.utils;
 
-import ifsp.doo.atas.domain.controller.pessoa.EditarPessoaController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
