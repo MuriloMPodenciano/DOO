@@ -99,6 +99,9 @@ public class BuscarAtaUseCase {
 
             createListPauta(pdf, ata, fonteSubTitulo, fonteParagrafo);
 
+            pdf.close();
+            writer.close();
+
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
