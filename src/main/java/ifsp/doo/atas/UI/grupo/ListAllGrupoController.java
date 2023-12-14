@@ -1,9 +1,9 @@
 package ifsp.doo.atas.UI.grupo;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.usecases.grupo.BuscarGrupoUseCase;
-import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,18 +42,12 @@ public class ListAllGrupoController {
     }
 
     @FXML
-    void detalhes(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.DetalhesGrupo"));
-            Scene detalhesGrupo = new Scene(fxmlLoader.load());
-            DetalhesGrupoController detalhesGrupoController = fxmlLoader.getController();
-            detalhesGrupoController.setGrupo(new Grupo(ListViewGrupos.getSelectionModel().getSelectedItem()));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(detalhesGrupo);
-            stage.show();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+    void detalhes(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/UI/grupo/DetalhesGrupo.fxml"));
+        DetalhesGrupoController detalhesGrupoController = fxmlLoader.getController();
+        detalhesGrupoController.setGrupo(new Grupo(ListViewGrupos.getSelectionModel().getSelectedItem()));
+
+        ControllerUtil.changeScene(event, "java/ifsp/doo/atas/UI/grupo/DetalhesGrupo.fxml");
     }
 
     @FXML

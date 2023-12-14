@@ -1,16 +1,12 @@
 package ifsp.doo.atas.UI.pessoa;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaPostRequestDTO;
 import ifsp.doo.atas.domain.usecases.pessoa.CadastrarPessoaUseCase;
-import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class CriarPessoaController {
     @FXML

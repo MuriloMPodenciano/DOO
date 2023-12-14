@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="300.0" prefWidth="281.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ifsp.doo.atas.domain.controller.pessoa.DetalhesPessoaController">
+            fx:controller="ifsp.doo.atas.UI.pessoa.DetalhesPessoaController">
    <Button layoutX="62.0" layoutY="247.0" mnemonicParsing="false" onAction="#ButtonEditarPessoa" text="Editar"
            AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="62.0"/>
    <Button layoutX="178.0" layoutY="247.0" mnemonicParsing="false" onAction="#ButtonVoltar" text="Voltar"

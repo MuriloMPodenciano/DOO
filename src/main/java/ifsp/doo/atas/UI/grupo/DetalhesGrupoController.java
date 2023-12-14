@@ -1,10 +1,9 @@
 package ifsp.doo.atas.UI.grupo;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;
-import ifsp.doo.atas.domain.model.Pessoa;
-import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,24 +46,20 @@ public class DetalhesGrupoController {
     @FXML
     void adicionarPessoa(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.ListAllGrupo"));
-        Scene scene = new Scene(fxmlLoader.load());
         AdicionarPessoaController controller = fxmlLoader.getController();
         GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
         controller.setGrupoId(grupoPersist.id());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+
+        ControllerUtil.changeScene(event, "ifsp.doo.atas.domain.UI.grupo.ListAllGrupo");
     }
 
     @FXML
     void editar(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.EditarGrupo"));
-        Scene scene = new Scene(fxmlLoader.load());
         EditarGrupoController controller = fxmlLoader.getController();
         controller.setGrupo(grupo);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+
+        ControllerUtil.changeScene(event, "ifsp.doo.atas.domain.UI.grupo.EditarGrupo");
     }
 
     @FXML

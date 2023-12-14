@@ -1,12 +1,12 @@
 package ifsp.doo.atas.UI.grupo;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoPutRequestDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.usecases.grupo.EditarGrupoUseCase;
 import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;
-import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,15 +61,11 @@ public class EditarGrupoController {
 
     @FXML
     void editar(ActionEvent event) throws IOException {
-        // GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
-        // GrupoPutRequestDTO grupoModificado = new GrupoPutRequestDTO(grupoPersist.id(), CheckboxAtivo.isSelected());
-        // editarGrupo.editarGrupo(grupoModificado);
+         GrupoGetPersistDTO grupoPersist = new GrupoGetPersistDTO(grupo);
+         GrupoPutRequestDTO grupoModificado = new GrupoPutRequestDTO(grupoPersist.id(), CheckboxAtivo.isSelected());
+         editarGrupo.editarGrupo(grupoModificado);
 
-        // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.DetalhesGrupo"));
-        // Scene detalhesGrupo = new Scene(fxmlLoader.load());
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // stage.setScene(detalhesGrupo);
-        // stage.show();
+         voltar(event);
     }
 
     @FXML

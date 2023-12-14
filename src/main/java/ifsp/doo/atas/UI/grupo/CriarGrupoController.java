@@ -1,10 +1,10 @@
 package ifsp.doo.atas.UI.grupo;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoPostRequestDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.usecases.grupo.CadastrarGrupoUseCase;
 import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;
-import ifsp.doo.atas.domain.utils.ControllerUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,11 +65,7 @@ public class CriarGrupoController {
         GrupoPostRequestDTO grupo = new GrupoPostRequestDTO(TextFieldNome.getText(), membros.stream().toList());
         criarGrupo.cadastrarGrupo(grupo);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.ListAllGrupo"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        voltar(event);
     }
 
     @FXML

@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="300.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ifsp.doo.atas.domain.controller.pessoa.EditarPessoaController">
+            fx:controller="ifsp.doo.atas.UI.pessoa.EditarPessoaController">
    <Label layoutX="120.0" layoutY="32.0" prefHeight="27.0" prefWidth="142.0" text="Editar Pessoa">
       <font>
          <Font size="18.0"/>
