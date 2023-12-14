@@ -65,11 +65,7 @@ public class CriarGrupoController {
         GrupoPostRequestDTO grupo = new GrupoPostRequestDTO(TextFieldNome.getText(), membros.stream().toList());
         criarGrupo.cadastrarGrupo(grupo);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.ListAllGrupo"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        voltar(event);
     }
 
     @FXML
