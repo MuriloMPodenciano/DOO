@@ -7,7 +7,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="315.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="315.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ifsp.doo.atas.UI.menu.MenuController">
     <Button layoutX="271.0" layoutY="15.0" mnemonicParsing="false" onAction="#ButtonExitUsuario" text="Deslogar"
             AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0"/>
     <Button layoutX="110.0" layoutY="90.0" mnemonicParsing="false" onAction="#ButtonListPessoa" prefHeight="43.0"
