@@ -79,4 +79,8 @@ public class EditarAtaUseCase {
 
         return new AtaGetResponseDTO(repository.save(ataAtualizada));
     }
+
+    public void deletar(Long id) {
+        repository.deleteById(id);
+    }
 }

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 @SpringBootApplication
 public class AtasReuniaoApplication extends Application {
     private static Stage stage;
+    private static Object controller;
 
     private static ConfigurableApplicationContext applicationContext;
 
@@ -34,6 +35,8 @@ public class AtasReuniaoApplication extends Application {
         AtasReuniaoApplication.stage = stage;
         loader.setControllerFactory(applicationContext::getBean);
         AnchorPane view = loader.load(getClass().getResource("ata/redator.fxml").openStream());
+        controller = loader.getController();
+
 
         Scene scene = new Scene(view);
         stage.setScene(scene);
@@ -45,10 +48,15 @@ public class AtasReuniaoApplication extends Application {
         loader.setControllerFactory(applicationContext::getBean);
 
         Parent view = loader.load(AtasReuniaoApplication.class.getResource(url).openStream());
+        controller = loader.getController();
 
         Scene scene = new Scene(view);
         AtasReuniaoApplication.stage.setScene(scene);
         AtasReuniaoApplication.stage.show();
+    }
+
+    public static Object getController() {
+        return controller;
     }
 
     @Override

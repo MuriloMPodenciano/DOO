@@ -14,7 +14,9 @@ import javafx.scene.control.ListView;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class ListarPessoaController {
     @FXML
     private Button ButtonDetalhesPessoa;
@@ -25,7 +27,7 @@ public class ListarPessoaController {
     @FXML
     private ListView<PessoaGetPersistDTO> ListViewPessoas;
 
-    private BuscarPessoaUseCase buscarPessoaUseCase;
+    private BuscarPessoaUseCase buscarPessoaUseCase = new BuscarPessoaUseCase();
 
     @FXML
     void initialize() {

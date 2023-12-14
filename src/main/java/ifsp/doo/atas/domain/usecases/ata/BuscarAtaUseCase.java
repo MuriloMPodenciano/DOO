@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.itextpdf.text.*;
@@ -14,7 +13,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import ifsp.doo.atas.domain.DTO.discussao.DiscussaoGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.informe.InformeGetResponseDTO;
 import ifsp.doo.atas.domain.DTO.pauta.PautaGetResponseDTO;
-import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 import ifsp.doo.atas.domain.model.AtaState;
 import org.springframework.beans.factory.annotation.Autowired;
 
