@@ -28,7 +28,13 @@ public class Grupo {
     }
 
     public Grupo(GrupoPostRequestDTO grupoDTO) {
-        this(grupoDTO.nome(), grupoDTO.funcionarios());
+        this(
+            grupoDTO.nome(),
+            grupoDTO.funcionarios()
+                .stream()
+                .map(Pessoa::new)
+                .collect(Collectors.toList())
+        );
     }
 
     public Grupo(GrupoGetPersistDTO grupoBanco) {

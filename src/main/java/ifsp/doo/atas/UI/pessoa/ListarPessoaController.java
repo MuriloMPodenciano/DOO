@@ -1,5 +1,6 @@
-package ifsp.doo.atas.domain.controller.pessoa;
+package ifsp.doo.atas.UI.pessoa;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.usecases.pessoa.BuscarPessoaUseCase;
 import javafx.collections.FXCollections;
@@ -7,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -45,14 +45,8 @@ public class ListarPessoaController {
     }
 
     @FXML
-    void ButtonVoltar(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/interface/local-javafx/menu/Menu.fxml"));
-        Parent root = fxmlLoader.load();
-
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+    void ButtonVoltar(ActionEvent event) {
+        ControllerUtil.closeWindow(event);
     }
 
     @FXML

@@ -1,5 +1,6 @@
-package ifsp.doo.atas.domain.controller.grupo;
+package ifsp.doo.atas.UI.grupo;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.usecases.grupo.BuscarGrupoUseCase;
@@ -57,6 +58,6 @@ public class ListAllGrupoController {
 
     @FXML
     void voltar(ActionEvent event) {
-//        ir para o menu
+        ControllerUtil.closeWindow(event);
     }
 }

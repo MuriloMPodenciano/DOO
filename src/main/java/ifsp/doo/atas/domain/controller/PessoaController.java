@@ -9,6 +9,7 @@ import ifsp.doo.atas.domain.usecases.pessoa.CadastrarPessoaUseCase;
 import ifsp.doo.atas.domain.usecases.pessoa.EditarPessoaUseCase;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pessoa")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PessoaController {
     @Autowired
     private CadastrarPessoaUseCase cadastrarPessoa;

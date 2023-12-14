@@ -1,15 +1,17 @@
-package ifsp.doo.atas.domain.controller.pessoa;
+package ifsp.doo.atas.UI.pessoa;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -43,14 +45,23 @@ public class DetalhesPessoaController {
         }
     }
     @FXML
-    void ButtonVoltar(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/interface/local-javafx/pessoa/ListarPessoa.fxml"));
+    void ButtonVoltar(ActionEvent event) {
+        ControllerUtil.closeWindow(event);
+    }
+    @FXML
+    private void ButtonEditarPessoa(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("java/ifsp/doo/atas/interface/local-javafx/pessoa/EditarPessoa.fxml"));
         Parent root = fxmlLoader.load();
 
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        EditarPessoaController editarPessoaController = fxmlLoader.getController();
+        editarPessoaController.setPessoa(selectedPessoa);
+
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.initStyle(StageStyle.UNDECORATED);
+        dialogStage.setScene(new Scene(root));
+
+        dialogStage.showAndWait();
     }
 
 }

@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ifsp.doo.atas.domain.DTO.discussao.DiscussaoGetResponseDTO;
+import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 import ifsp.doo.atas.domain.model.PautaState;
-import ifsp.doo.atas.domain.model.Pessoa;
 
 public record PautaGetResponseDTO(
     Long id,
     String pauta,
-    Pessoa pessoa,
+    PessoaGetResponseDTO pessoa,
     List<DiscussaoGetResponseDTO> discussoes,
     String decisao,
     PautaState estado
@@ -19,7 +19,7 @@ public record PautaGetResponseDTO(
         this(
             pauta.getId(),
             pauta.getPauta(),
-            pauta.getPessoa(),
+            new PessoaGetResponseDTO(pauta.getPessoa()),
             pauta.getDiscussoes()
                 .stream()
                 .map(DiscussaoGetResponseDTO::new)

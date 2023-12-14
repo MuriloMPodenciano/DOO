@@ -1,10 +1,11 @@
-package ifsp.doo.atas.domain.controller.grupo;
+package ifsp.doo.atas.UI.grupo;
 
+import ifsp.doo.atas.UI.utils.ControllerUtil;
 import ifsp.doo.atas.domain.DTO.grupo.GrupoGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetPersistDTO;
 import ifsp.doo.atas.domain.model.Grupo;
 import ifsp.doo.atas.domain.model.Pessoa;
-import javafx.collections.FXCollections;
+=import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,12 +68,8 @@ public class DetalhesGrupoController {
     }
 
     @FXML
-    void voltar(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ifsp.doo.atas.domain.UI.grupo.ListAllGrupo"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+    void voltar(ActionEvent event) {
+        ControllerUtil.closeWindow(event);
     }
 
     public void setGrupo(Grupo grupo) {

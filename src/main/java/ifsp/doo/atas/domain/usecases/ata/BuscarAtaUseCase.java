@@ -3,7 +3,6 @@ package ifsp.doo.atas.domain.usecases.ata;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,7 +18,6 @@ import ifsp.doo.atas.domain.DTO.pessoa.PessoaGetResponseDTO;
 import ifsp.doo.atas.domain.model.AtaState;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ifsp.doo.atas.domain.DTO.ata.AtaGetPersistDTO;
 import ifsp.doo.atas.domain.DTO.ata.AtaGetResponseDTO;
 import ifsp.doo.atas.domain.repository.AtaRepository;
 
@@ -208,7 +206,7 @@ public class BuscarAtaUseCase {
         celulaTituloInformado.setVerticalAlignment(Element.ALIGN_CENTER);
         tabelaInforme.addCell(celulaTituloInformado);
 
-        for(InformeGetResponseDTO informe : informes){
+        for (InformeGetResponseDTO informe : informes) {
             PdfPCell celulaInforme = new PdfPCell(new Phrase(informe.informe()));
             celulaInforme.setHorizontalAlignment(Element.ALIGN_CENTER);
             celulaInforme.setVerticalAlignment(Element.ALIGN_CENTER);
@@ -224,6 +222,5 @@ public class BuscarAtaUseCase {
             celulaInformado.setVerticalAlignment(Element.ALIGN_CENTER);
             tabelaInforme.addCell(celulaInformado);
         }
-
     }
 }

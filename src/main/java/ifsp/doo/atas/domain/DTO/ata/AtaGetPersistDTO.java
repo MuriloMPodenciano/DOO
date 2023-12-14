@@ -24,7 +24,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "Ata")
 @Table(name = "Ata")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,7 +38,7 @@ public class AtaGetPersistDTO {
     private String descricao;
     private String textoAbertura;
 
-    @OneToMany
+    @ManyToOne
     private PessoaGetPersistDTO pessoa;
 
     private LocalDateTime dataInicio;
